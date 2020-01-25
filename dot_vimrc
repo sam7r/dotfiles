@@ -67,5 +67,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vim-airline/vim-airline'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'dense-analysis/ale'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()

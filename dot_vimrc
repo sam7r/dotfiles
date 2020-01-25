@@ -28,8 +28,23 @@ set ttyfast " Assume a modern terminal, fast ‘connection’
 set viminfo+=! " Keep all-caps global variables
 set wildmenu " List possible completions on status line
 
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'vim-airline/vim-airline'
+Plug 'dense-analysis/ale'
+Plug 'ryanoasis/vim-devicons'
+
+" Themes
+Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'sonph/onehalf', {'rtp': 'vim/'}
+
+call plug#end()
+
 " Color scheme
-colorscheme onehalfdark
+colorscheme palenight
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -50,23 +65,10 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 map <C-n> :NERDTreeToggle<CR>
 
 " Vim dev icons
-set guifont=Hack\ Nerd\ Font\ Mono\ 18
+" set guifont=Hack\ Nerd\ Font\ Mono\ 18
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 
 " Airline config
 let g:airline_powerline_fonts = 1
-let g:airline_theme='onehalfdark'
-
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'vim-airline/vim-airline'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'dense-analysis/ale'
-Plug 'ryanoasis/vim-devicons'
-
-call plug#end()
+let g:airline_theme='palenight'

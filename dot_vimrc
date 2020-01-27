@@ -26,8 +26,11 @@ set tabpagemax=50 " Maximum number of tabs to be opened
 set tags=./tags;,tags " Default locations for tags files
 set ttyfast " Assume a modern terminal, fast ‘connection’
 set viminfo+=! " Keep all-caps global variables
+" Quickly insert an empty new line without entering insert mode
+nnoremap <Leader>o o<Esc>
+nnoremap <Leader>O O<Esc>
+set wildmode=longest,list,full " Tab autocompletion settings
 set wildmenu " List possible completions on status line
-
 
 call plug#begin('~/.vim/plugged')
 

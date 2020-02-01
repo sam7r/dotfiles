@@ -40,6 +40,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vim-airline/vim-airline'
 Plug 'dense-analysis/ale'
 Plug 'ryanoasis/vim-devicons'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 
 " Themes
 Plug 'drewtempelmeyer/palenight.vim'

@@ -42,6 +42,7 @@ Plug 'dense-analysis/ale'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'tpope/vim-fugitive'
+Plug 'camspiers/animate.vim'
 
 " Themes
 Plug 'drewtempelmeyer/palenight.vim'
@@ -49,6 +50,13 @@ Plug 'drewtempelmeyer/palenight.vim'
 
 call plug#end()
 
+" Remap arrow keys and animate
+nnoremap <silent> <Up>    :call animate#window_delta_height(10)<CR>
+nnoremap <silent> <Down>  :call animate#window_delta_height(-10)<CR>
+nnoremap <silent> <Left>  :call animate#window_delta_width(10)<CR>
+nnoremap <silent> <Right> :call animate#window_delta_width(-10)<CR>
+let g:animate#duration = 300.0
+let g:animate#easing_func = 'animate#ease_linear'
 
 " Color scheme
 colorscheme palenight

@@ -43,10 +43,10 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'tpope/vim-fugitive'
 Plug 'camspiers/animate.vim'
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 " Themes
 Plug 'drewtempelmeyer/palenight.vim'
-" Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 call plug#end()
 

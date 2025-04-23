@@ -198,6 +198,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 
 _evalcache pyenv init - zsh
 _evalcache starship init zsh
+_evalcache thefuck --alias
 
 . "$HOME/.deno/env"
 

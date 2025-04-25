@@ -20,6 +20,7 @@ ZSH_THEME="robbyrussell"
 export NVM_DIR="/usr/share/nvm"
 export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

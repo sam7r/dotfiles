@@ -1,5 +1,4 @@
 local wezterm = require("wezterm")
-local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
 local act = wezterm.action
 
 return {
@@ -83,17 +82,17 @@ return {
 				mode = "SwapWithActiveKeepFocus",
 			}),
 		},
-		--		{
-		--			key = "A",
-		--			mods = "LEADER",
-		--			action = act.AttachDomain("unix"),
-		--		},
-		--		-- Detach from muxer
-		--		{
-		--			key = "D",
-		--			mods = "LEADER",
-		--			action = act.DetachDomain({ DomainName = "unix" }),
-		--		},
+		{
+			key = "A",
+			mods = "LEADER",
+			action = act.AttachDomain("unix"),
+		},
+		-- Detach from muxer
+		{
+			key = "Z",
+			mods = "LEADER",
+			action = act.DetachDomain({ DomainName = "unix" }),
+		},
 		{
 			key = "W",
 			mods = "LEADER",
@@ -104,9 +103,13 @@ return {
 		-- Rename current workspace
 		{
 			key = "R",
-			mods = "LEADER|SHIFT",
+			mods = "LEADER",
 			action = act.PromptInputLine({
-				description = "Enter new name for workspace",
+				description = wezterm.format({
+					{ Attribute = { Intensity = "Bold" } },
+					{ Foreground = { AnsiColor = "Fuchsia" } },
+					{ Text = "Rename current workspace" },
+				}),
 				action = wezterm.action_callback(function(window, pane, line)
 					if line then
 						wezterm.mux.rename_workspace(window:mux_window():get_workspace(), line)
@@ -116,7 +119,7 @@ return {
 		},
 		-- Prompt for a name to use for a new workspace and switch to it.
 		{
-			key = "$",
+			key = "Q",
 			mods = "LEADER",
 			action = act.PromptInputLine({
 				description = wezterm.format({

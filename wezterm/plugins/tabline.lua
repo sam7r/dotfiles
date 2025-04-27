@@ -1,11 +1,19 @@
 local wezterm = require("wezterm")
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
+-- function to handle falling back to pane title if custom title is not set
+local function tab_fmt(text, tab)
+	if text == "default" then
+		return tab.active_pane.title
+	end
+	return text
+end
+
 return tabline.setup({
 	options = {
 		icons_enabled = true,
 		tabs_enabled = true,
-		theme = "Catppuccin Mocha",
+		theme = "Dracula (Official)",
 		theme_overrides = {},
 		section_separators = {
 			left = wezterm.nerdfonts.pl_left_hard_divider,
@@ -29,13 +37,15 @@ return tabline.setup({
 				"tab", -- the title set in prompt for set title
 				icons_enabled = false,
 				padding = { left = 1, right = 1 },
+				fmt = tab_fmt,
 			},
 		},
 		tab_inactive = {
 			{
-				"tab", -- the title set in prompt for set title
+				"tab",
 				icons_enabled = false,
 				padding = { left = 1, right = 1 },
+				fmt = tab_fmt,
 			},
 		},
 		tabline_x = {},

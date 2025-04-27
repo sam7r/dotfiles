@@ -22,7 +22,7 @@ config.keys = {
 		end),
 	},
 	{
-		key = "{",
+		key = "T",
 		mods = "LEADER",
 		action = wezterm.action_callback(function(win, pane)
 			resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id, label)

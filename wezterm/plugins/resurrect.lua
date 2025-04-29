@@ -44,7 +44,12 @@ config.keys = {
 					local state = resurrect.state_manager.load_state(id, "tab")
 					resurrect.tab_state.restore_tab(pane:tab(), state, opts)
 				end
-			end)
+			end, {
+				is_fuzzy = true,
+				ignore_tabs = true,
+				ignore_windows = true,
+				show_state_with_date = true,
+			})
 		end),
 	},
 	{
@@ -58,6 +63,9 @@ config.keys = {
 				description = "Select State to Delete and press Enter = accept, Esc = cancel, / = filter",
 				fuzzy_description = "Search State to Delete: ",
 				is_fuzzy = true,
+				ignore_tabs = true,
+				ignore_windows = true,
+				show_state_with_date = true,
 			})
 		end),
 	},

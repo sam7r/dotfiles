@@ -14,7 +14,6 @@ return tabline.setup({
 		icons_enabled = true,
 		tabs_enabled = true,
 		theme = "Dracula (Official)",
-		theme_overrides = {},
 		section_separators = {
 			left = wezterm.nerdfonts.pl_left_hard_divider,
 			right = wezterm.nerdfonts.pl_right_hard_divider,
@@ -29,31 +28,38 @@ return tabline.setup({
 		},
 	},
 	sections = {
-		tabline_a = { "mode" },
+		tabline_a = { "mode", icon = wezterm.nerdfonts.md_terminal },
 		tabline_b = { "workspace", icon = wezterm.nerdfonts.cod_terminal_tmux },
-		tabline_c = { " " },
 		tab_active = {
 			{
 				"tab", -- the title set in prompt for set title
-				icons_enabled = false,
-				padding = { left = 1, right = 1 },
+				icons_enabled = true,
+				padding = { left = 2, right = 2 },
 				fmt = tab_fmt,
 			},
 		},
 		tab_inactive = {
 			{
 				"tab",
-				icons_enabled = false,
-				padding = { left = 1, right = 1 },
+				icons_enabled = true,
+				padding = { left = 2, right = 2 },
 				fmt = tab_fmt,
 			},
 		},
 		tabline_x = {},
-		tabline_y = {},
+		tabline_y = {
+			{
+				"hostname",
+				icon = wezterm.nerdfonts.md_console_network,
+				fmt = function(txt)
+					return txt:gsub("ip.", ""):gsub("-", ".")
+				end,
+			},
+		},
 		tabline_z = {
 			"domain",
 			domain_to_icon = {
-				default = wezterm.nerdfonts.cod_terminal_linux,
+				default = wezterm.nerdfonts.md_terminal,
 				ssh = wezterm.nerdfonts.md_ssh,
 				wsl = wezterm.nerdfonts.md_microsoft_windows,
 				docker = wezterm.nerdfonts.md_docker,

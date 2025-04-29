@@ -146,13 +146,14 @@ bindkey '^e' edit-command-line
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
 export ANDROID_HOME="$HOME/Android/Sdk"
+. "$HOME/.deno/env"
+
+# Local language bins
 export PATH=~/.netrc:$PATH
+export PATH=~/go/bin:$PATH
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
-
-# Add deno completions to search path
-. "$HOME/.deno/env"
 
 _evalcache starship init zsh
 _evalcache thefuck --alias

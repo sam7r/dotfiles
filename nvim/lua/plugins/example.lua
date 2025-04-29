@@ -9,6 +9,21 @@ if true then return {} end
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
+
+    { "echasnovski/mini.nvim", version = "*" },
+
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "echasnovski/mini.nvim",
+        },
+        enabled = true,
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
+        opts = {},
+    },
+
     -- add gruvbox
     { "ellisonleao/gruvbox.nvim" },
 
@@ -29,16 +44,6 @@ return {
 
     -- disable trouble
     { "folke/trouble.nvim", enabled = false },
-
-    -- override nvim-cmp and add cmp-emoji
-    {
-        "hrsh7th/nvim-cmp",
-        dependencies = { "hrsh7th/cmp-emoji" },
-        ---@param opts cmp.ConfigSchema
-        opts = function(_, opts)
-            table.insert(opts.sources, { name = "emoji" })
-        end,
-    },
 
     -- change some telescope options and a keymap to browse plugin files
     {
@@ -185,15 +190,16 @@ return {
     -- add snacks config
     {
         "folke/snacks.nvim",
-        ---@type snacks.Config
         opts = {
             picker = {
-                files = {
-                    hidden = true,
-                    ignored = true,
-                },
-                explorer = {
-                    auto_close = true,
+                hidden = true,
+                ignored = true,
+
+                sources = {
+                    files = {
+                        hidden = true,
+                        ignored = true,
+                    },
                 },
             },
         },

@@ -45,14 +45,14 @@ return {
 			action = act.ActivatePaneDirection("Down"),
 		}, -- add new panes
 		{
-			key = "-",
+			key = "J",
 			mods = "LEADER",
 			action = act.SplitVertical({
 				domain = "CurrentPaneDomain",
 			}),
 		},
 		{
-			key = "|",
+			key = "L",
 			mods = "LEADER",
 			action = act.SplitHorizontal({
 				domain = "CurrentPaneDomain",
@@ -100,6 +100,9 @@ return {
 				flags = "FUZZY|WORKSPACES",
 			}),
 		},
+		-- Workspace switch bindings
+		{ key = "w", mods = "LEADER", action = act.SwitchWorkspaceRelative(1) },
+		{ key = "q", mods = "LEADER", action = act.SwitchWorkspaceRelative(-1) },
 		-- Rename current workspace
 		{
 			key = "R",

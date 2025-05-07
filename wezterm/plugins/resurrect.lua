@@ -5,8 +5,8 @@ local config = {}
 
 resurrect.state_manager.periodic_save({
 	interval_seconds = 300,
-	save_tabs = true,
-	save_windows = true,
+	save_tabs = false,
+	save_windows = false,
 	save_workspaces = true,
 })
 
@@ -63,8 +63,8 @@ config.keys = {
 				description = "Select State to Delete and press Enter = accept, Esc = cancel, / = filter",
 				fuzzy_description = "Search State to Delete: ",
 				is_fuzzy = true,
-				ignore_tabs = true,
-				ignore_windows = true,
+				ignore_tabs = false,
+				ignore_windows = false,
 				show_state_with_date = true,
 			})
 		end),

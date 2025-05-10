@@ -5,6 +5,8 @@ local resurrect = require("plugins.resurrect")
 
 require("plugins.tabline")
 
+wezterm.plugin.update_all()
+
 return {
 	default_cursor_style = "BlinkingBlock",
 	color_scheme = "Poimandres",

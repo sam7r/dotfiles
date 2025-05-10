@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
-return {
+local mappings = {
 	leader = {
 		key = "Space",
 		mods = "SHIFT",
@@ -188,3 +188,14 @@ return {
 		},
 	},
 }
+
+for i = 1, 8 do
+	-- CTRL+ALT + number to move to that position
+	table.insert(mappings.keys, {
+		key = tostring(i),
+		mods = "LEADER",
+		action = wezterm.action.MoveTab(i - 1),
+	})
+end
+
+return mappings

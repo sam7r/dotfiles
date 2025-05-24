@@ -3,6 +3,9 @@ return {
     {
         "folke/snacks.nvim",
         opts = {
+            dashboard = {
+                enabled = true,
+            },
             picker = {
                 hidden = true,
                 ignored = true,

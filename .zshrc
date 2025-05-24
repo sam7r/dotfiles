@@ -50,7 +50,7 @@ export LANG=en_GB.UTF-8
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -154,6 +154,8 @@ export PATH=~/go/bin:$PATH
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
+
+source <(kubectl completion zsh)
 
 _evalcache starship init zsh
 _evalcache thefuck --alias

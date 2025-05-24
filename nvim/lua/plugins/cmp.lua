@@ -17,6 +17,7 @@ return {
             local cmp = require("cmp")
 
             cmp.config.sources({
+                { name = "copilot" },
                 { name = "render-markdown" },
             })
 

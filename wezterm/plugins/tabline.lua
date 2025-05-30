@@ -6,14 +6,13 @@ local function tab_fmt(text, tab)
 	if text == "default" then
 		return tab.active_pane.title
 	end
-	return text
+	return " " .. text
 end
 
 return tabline.setup({
 	options = {
 		icons_enabled = true,
 		tabs_enabled = true,
-		theme = "Dracula (Official)",
 		section_separators = {
 			left = wezterm.nerdfonts.pl_left_hard_divider,
 			right = wezterm.nerdfonts.pl_right_hard_divider,
@@ -32,25 +31,17 @@ return tabline.setup({
 		tabline_b = { "workspace", icon = wezterm.nerdfonts.cod_terminal_tmux },
 		tab_active = {
 			{
-				"index",
-				padding = { left = 1, right = 1 },
-			},
-			{
 				"tab", -- the title set in prompt for set title
 				icons_enabled = true,
-				padding = { left = 0, right = 1 },
+				padding = { left = 1, right = 1 },
 				fmt = tab_fmt,
 			},
 		},
 		tab_inactive = {
 			{
-				"index",
-				padding = { left = 1, right = 1 },
-			},
-			{
 				"tab",
 				icons_enabled = true,
-				padding = { left = 0, right = 1 },
+				padding = { left = 1, right = 1 },
 				fmt = tab_fmt,
 			},
 		},

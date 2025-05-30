@@ -7,20 +7,9 @@ require("plugins.tabline")
 
 return {
 	default_cursor_style = "BlinkingBlock",
-	color_scheme = "Poimandres",
-	colors = {
-		cursor_bg = "#A6ACCD",
-		cursor_border = "#A6ACCD",
-		cursor_fg = "#1B1E28",
-		compose_cursor = "orange",
-	},
-	-- font
-	font = wezterm.font("FiraCode Nerd Font Mono", {
-		weight = "Medium",
-	}),
 	font_size = 15,
 	line_height = 1,
-	window_background_opacity = 0.9,
+	window_background_opacity = 0.98,
 	macos_window_background_blur = 20,
 	-- tab bar
 	use_fancy_tab_bar = false,
@@ -44,4 +33,24 @@ return {
 	leader = mappings.leader,
 	keys = merge.all(mappings.keys, resurrect.keys),
 	key_tables = mappings.key_tables,
+	-- font_size = 12,
+	font = wezterm.font("FiraCode Nerd Font"),
+	font_rules = {
+		{
+			intensity = "Bold",
+			font = wezterm.font("FiraCode Nerd Font", { weight = "Bold" }),
+		},
+		{
+			italic = true,
+			font = wezterm.font("VictorMono Nerd Font", { weight = "DemiLight" }),
+		},
+		{
+			italic = true,
+			intensity = "Bold",
+			font = wezterm.font("VictorMono Nerd Font", { weight = "DemiBold" }),
+		},
+	},
+	-- taken from https://github.com/folke/tokyonight.nvim/blob/main/extras/wezterm
+	color_scheme_dirs = { "./themes" },
+	color_scheme = "tokyonight_night",
 }

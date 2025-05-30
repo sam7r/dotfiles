@@ -13,13 +13,13 @@ return {
 	macos_window_background_blur = 20,
 	-- tab bar
 	use_fancy_tab_bar = false,
-	tab_bar_at_bottom = false,
+	tab_bar_at_bottom = true,
 	hide_tab_bar_if_only_one_tab = false,
 	tab_max_width = 999999,
 	window_padding = {
-		left = 20,
-		right = 20,
-		top = 15,
+		left = 0,
+		right = 0,
+		top = 0,
 		bottom = 0,
 	},
 	window_decorations = "RESIZE",
@@ -52,5 +52,5 @@ return {
 	},
 	-- taken from https://github.com/folke/tokyonight.nvim/blob/main/extras/wezterm
 	color_scheme_dirs = { "./themes" },
-	color_scheme = "tokyonight_night",
+	color_scheme = "tokyonight_moon",
 }

@@ -11,24 +11,27 @@ end
 
 return tabline.setup({
 	options = {
+		theme = "tokyonight_moon",
 		icons_enabled = true,
 		tabs_enabled = true,
 		section_separators = {
-			left = wezterm.nerdfonts.pl_left_hard_divider,
-			right = wezterm.nerdfonts.pl_right_hard_divider,
+			left = "",
+			right = "",
 		},
 		component_separators = {
-			left = wezterm.nerdfonts.pl_left_soft_divider,
-			right = wezterm.nerdfonts.pl_right_soft_divider,
+			left = "",
+			right = "",
 		},
 		tab_separators = {
-			left = wezterm.nerdfonts.pl_left_hard_divider,
-			right = wezterm.nerdfonts.pl_right_hard_divider,
+			left = "",
+			right = "",
 		},
 	},
 	sections = {
-		tabline_a = { "mode", icon = wezterm.nerdfonts.md_terminal },
-		tabline_b = { "workspace", icon = wezterm.nerdfonts.cod_terminal_tmux },
+		-- tabline_a = { "mode", icon = wezterm.nerdfonts.md_terminal },
+		-- tabline_b = { "workspace", icon = wezterm.nerdfonts.cod_terminal_tmux },
+		tabline_a = {},
+		tabline_b = {},
 		tab_active = {
 			{
 				"tab", -- the title set in prompt for set title
@@ -55,16 +58,17 @@ return tabline.setup({
 				end,
 			},
 		},
-		tabline_z = {
-			"domain",
-			domain_to_icon = {
-				default = wezterm.nerdfonts.md_terminal,
-				ssh = wezterm.nerdfonts.md_ssh,
-				wsl = wezterm.nerdfonts.md_microsoft_windows,
-				docker = wezterm.nerdfonts.md_docker,
-				unix = wezterm.nerdfonts.cod_terminal_linux,
-			},
-		},
+		tabline_z = {},
+		-- tabline_z = {
+		-- 	"domain",
+		-- 	domain_to_icon = {
+		-- 		default = wezterm.nerdfonts.md_terminal,
+		-- 		ssh = wezterm.nerdfonts.md_ssh,
+		-- 		wsl = wezterm.nerdfonts.md_microsoft_windows,
+		-- 		docker = wezterm.nerdfonts.md_docker,
+		-- 		unix = wezterm.nerdfonts.cod_terminal_linux,
+		-- 	},
+		-- },
 	},
 	extensions = {
 		"resurrect",

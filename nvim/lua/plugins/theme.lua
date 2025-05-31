@@ -7,7 +7,6 @@ return {
             vim.cmd([[colorscheme tokyonight]])
         end,
         opts = {
-            transparent = true,
             style = "moon",
             styles = {
                 sidebars = "transparent",

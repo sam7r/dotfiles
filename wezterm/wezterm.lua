@@ -3,19 +3,23 @@ local mappings = require("modules.mappings")
 local merge = require("modules.utils")
 local resurrect = require("plugins.resurrect")
 
-require("plugins.tabline")
+local config = wezterm.config_builder()
+require("tabs").setup(config)
 
 return {
-	default_cursor_style = "BlinkingBlock",
 	font_size = 15,
+	default_cursor_style = "BlinkingBar",
+	cursor_blink_ease_in = "Constant",
+	cursor_blink_ease_out = "Constant",
 	line_height = 1,
-	window_background_opacity = 0.98,
+	window_background_opacity = 0.95,
 	macos_window_background_blur = 20,
 	-- tab bar
 	use_fancy_tab_bar = false,
 	tab_bar_at_bottom = true,
-	hide_tab_bar_if_only_one_tab = false,
-	tab_max_width = 999999,
+	hide_tab_bar_if_only_one_tab = true,
+	tab_max_width = 32,
+	unzoom_on_switch_pane = true,
 	window_padding = {
 		left = 0,
 		right = 0,

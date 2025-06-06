@@ -1,6 +1,6 @@
-local merge = {}
+local M = {}
 
-function merge.all(base, overrides)
+M.merge = function(base, overrides)
 	local ret = base or {}
 	local second = overrides or {}
 	for _, v in pairs(second) do
@@ -9,4 +9,15 @@ function merge.all(base, overrides)
 	return ret
 end
 
-return merge
+M.filter = function(tbl, callback)
+	local filt_table = {}
+
+	for i, v in ipairs(tbl) do
+		if callback(v, i) then
+			table.insert(filt_table, v)
+		end
+	end
+	return filt_table
+end
+
+return M

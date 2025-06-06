@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 local mappings = require("modules.mappings")
-local merge = require("modules.utils")
+local utils = require("modules.utils")
 local resurrect = require("plugins.resurrect")
 
 local config = wezterm.config_builder()
@@ -35,7 +35,7 @@ return {
 	send_composed_key_when_right_alt_is_pressed = true,
 	-- key bindings
 	leader = mappings.leader,
-	keys = merge.all(mappings.keys, resurrect.keys),
+	keys = utils.merge(mappings.keys, resurrect.keys),
 	key_tables = mappings.key_tables,
 	-- font_size = 12,
 	font = wezterm.font("FiraCode Nerd Font"),

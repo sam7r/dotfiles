@@ -1,5 +1,7 @@
 local wezterm = require("wezterm")
+local util = require("modules.utils")
 local act = wezterm.action
+local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 
 local mappings = {
 	leader = {
@@ -141,9 +143,47 @@ local mappings = {
 							}),
 							pane
 						)
+						--- check if workspace state exists in resurrect
+						local state = resurrect.state_manager.load_state(line, "workspace")
+						if state then
+							local opts = {
+								relative = true,
+								restore_text = true,
+								on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+							}
+							resurrect.workspace_state.restore_workspace(state, opts)
+						end
 					end
 				end),
 			}),
+		},
+		{
+			key = "K",
+			mods = "LEADER",
+			action = wezterm.action_callback(function(window)
+				local workspace = window:active_workspace()
+				local success, stdout = wezterm.run_child_process({ "wezterm", "cli", "list", "--format=json" })
+
+				if success then
+					local json = wezterm.json_parse(stdout)
+					if not json then
+						return
+					end
+
+					local workspace_panes = util.filter(json, function(p)
+						return p.workspace == workspace
+					end)
+
+					for _, p in ipairs(workspace_panes) do
+						wezterm.run_child_process({
+							"wezterm",
+							"cli",
+							"kill-pane",
+							"--pane-id=" .. p.pane_id,
+						})
+					end
+				end
+			end),
 		},
 	},
 

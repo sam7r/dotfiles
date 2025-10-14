@@ -1,7 +1,7 @@
 return {
     -- add any tools you want to have installed below
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = {
             ensure_installed = {
                 "bash-language-server",
@@ -35,7 +35,6 @@ return {
                 "stylua",
                 "terraform-ls",
                 "tflint",
-                "vtsls",
                 "typos-lsp",
                 "yaml-language-server",
                 "yq",

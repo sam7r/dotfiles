@@ -17,6 +17,9 @@ return {
             {
                 "nvim-neotest/neotest-jest",
             },
+            {
+                "adrigzr/neotest-mocha",
+            },
         },
         opts = {
             adapters = {
@@ -33,6 +36,12 @@ return {
                     jest_test_discovery = true,
                     env = { CI = true },
                     args = { "--coverage=false", "--passWithNoTests" },
+                },
+                ["neotest-mocha"] = {
+                    mochaCommand = "npm test --",
+                    mocha_test_discovery = true,
+                    env = { CI = true },
+                    args = { "--reporter", "spec" },
                 },
             },
         },

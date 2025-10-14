@@ -10,12 +10,12 @@ if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then export FPATH="$HOME/.z
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# Load packages and setup autocomple
+# Load packages and setup autocomplete
 export NVM_DIR="$HOME/.nvm"
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 export NVM_AUTO_USE=true
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim' 'lazykube')
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -70,6 +70,7 @@ alias vnote="cd ~/Notes && vim ."
 alias ls="eza --icons=always"
 alias cd="z"
 alias sdn="systemctl poweroff"
+alias gotest="go test -race ./..."
 
 autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}"
@@ -151,6 +152,8 @@ export ANDROID_HOME="$HOME/Android/Sdk"
 # Local language bins
 export PATH=~/.netrc:$PATH
 export PATH=~/go/bin:$PATH
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
@@ -160,6 +163,7 @@ source <(kubectl completion zsh)
 _evalcache starship init zsh
 _evalcache thefuck --alias
 _evalcache zoxide init zsh
+_evalcache pyenv init - zsh
 
 if [[ `uname` == "Linux" ]]; then
 fi

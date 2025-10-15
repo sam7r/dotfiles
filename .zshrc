@@ -69,7 +69,6 @@ alias ewd="cd ~/Code/efcloud"
 alias vnote="cd ~/Notes && vim ."
 alias ls="eza --icons=always"
 alias cd="z"
-alias sdn="systemctl poweroff"
 alias gotest="go test -race ./..."
 
 autoload -U colors && colors
@@ -166,6 +165,9 @@ _evalcache zoxide init zsh
 _evalcache pyenv init - zsh
 
 if [[ `uname` == "Linux" ]]; then
+    alias sdn="systemctl poweroff"
+    alias sdr="shutdown -r now"
+    export PATH="$HOME/.local/bin:$PATH"
 fi
 
 if [[ `uname` == "Darwin" ]]; then

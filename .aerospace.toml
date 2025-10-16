@@ -154,11 +154,7 @@ inner.vertical = 10
 outer.left = 10
 outer.right = 10
 outer.bottom = 10
-outer.top = 10
-# outer.top = [
-# { monitor."LG HDR 4K" = 40 },
-# { monitor."LG ULTRAGEAR+" = 40 },
-# { monitor."DELL S2718D" = 40 },
-# { monitor."DELL S3425DW" = 10 },
-#     5,
-# ]
+outer.top = [
+{ monitor."Built-in Retina Display"= 0 },
+    10,
+]

@@ -1,7 +1,8 @@
 /*Dracula theme based on the Purple official rofi theme*/
 
 * {
-    font: "FiraCode Nerd Font 16";
+    // font: "FiraCode Nerd Font 16";
+    font: "JetbrainsMono NF 16";
     foreground: #cad3f5;
     background-color: #282a36;
     active-background: #363a4f;
@@ -20,7 +21,7 @@
     border-color:  rgba(202, 211, 245, 0.2);
     padding:          10px 5px 0;
     width: 480px;
-    height: 284px;
+    height: 300px;
 }
 #mainbox {
     border:  0;

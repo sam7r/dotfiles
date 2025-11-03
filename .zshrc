@@ -165,9 +165,8 @@ _evalcache zoxide init zsh
 _evalcache pyenv init - zsh
 
 if [[ `uname` == "Linux" ]]; then
-    alias sdn="systemctl poweroff"
+    alias sdn="shutdown -h now"
     alias sdr="shutdown -r now"
-    export PATH="$HOME/.local/bin:$PATH"
 fi
 
 if [[ `uname` == "Darwin" ]]; then

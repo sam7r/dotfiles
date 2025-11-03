@@ -71,6 +71,7 @@ alias ls="eza --icons=always"
 alias cd="z"
 alias gotest="go test -race ./..."
 
+
 autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}"
 PS1="$PS1 $(git_super_status)"
@@ -163,6 +164,7 @@ _evalcache starship init zsh
 _evalcache thefuck --alias
 _evalcache zoxide init zsh
 _evalcache pyenv init - zsh
+_evalcache register-python-argcomplete --no-defaults exegol
 
 if [[ `uname` == "Linux" ]]; then
     alias sdn="shutdown -h now"

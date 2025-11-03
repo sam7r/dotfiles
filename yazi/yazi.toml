@@ -1,16 +1,29 @@
 [mgr]
 linemode = "size_and_mtime"
 
-[plugin]
-prepend_preloaders = [{ mime = "{audio,video,image}/*", run = "mediainfo" }]
-prepend_previewers = [
-  { mime = "{audio,video,image}/*", run = "mediainfo" },
-  { name = "*.md", run = "glow" },
-]
-prepend_fetchers = [
-  { id = "mime", name = "*", run = "mime-ext", prio = "high" },
-]
+[[plugin.prepend_preloaders]]
+mime = "{audio,video}/*"
+run = "mediainfo"
 
-[opener]
-edit = [{ run = 'nvim "$@"', block = true }]
-play = [{ run = 'mpv "$@"', orphan = true, for = "unix" }]
+[[plugin.prepend_previewers]]
+mime = "{audio,video}/*"
+run = "mediainfo"
+
+[[plugin.prepend_previewers]]
+name = "*.md"
+run = "glow"
+
+[[plugin.prepend_fetchers]]
+id = "mime"
+name = "*"
+run = "mime-ext"
+prio = "high"
+
+[[opener.edit]]
+run = 'nvim "$@"'
+block = true
+
+[[opener.play]]
+run = 'mpv "$@"'
+orphan = true
+for = "unix"

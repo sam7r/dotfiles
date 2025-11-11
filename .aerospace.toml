@@ -15,7 +15,7 @@ start-at-login = true
 
 [mode.main.binding]
 # See: https://nikitabobko.github.io/AeroSpace/goodies#open-a-new-window-with-applescript
-alt-enter = 'exec-and-forget wezterm start'
+alt-enter = "exec-and-forget wezterm cli spawn --new-window --workspace=$(wezterm cli list-clients | sed -n '2p' | awk '{print $6}') || wezterm start"
 #    alt-enter = '''exec-and-forget osascript -e '
 #    tell application "iTerm"
 #    	create window with default profile
@@ -102,13 +102,13 @@ esc = 'mode main'
 9 = ["LG ULTRAGEAR+", "DELL S3425DW", 3]
 
 after-startup-command = [
-    # JankyBorders has a built-in detection of already running process,
-    # so it won't be run twice on AeroSpace restart
-    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=1.0',
-    # Run Sketchybar together with AeroSpace
-    # sketchbar has a built-in detection of already running process,
-    # so it won't be run twice on AeroSpace restart
-    # 'exec-and-forget sketchybar --bar display=main',
+  # JankyBorders has a built-in detection of already running process,
+  # so it won't be run twice on AeroSpace restart
+  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=1.0',
+  # Run Sketchybar together with AeroSpace
+  # sketchbar has a built-in detection of already running process,
+  # so it won't be run twice on AeroSpace restart
+  # 'exec-and-forget sketchybar --bar display=main',
 ]
 
 # Notify Sketchybar about workspace change
@@ -154,7 +154,4 @@ inner.vertical = 10
 outer.left = 10
 outer.right = 10
 outer.bottom = 10
-outer.top = [
-{ monitor."Built-in Retina Display"= 0 },
-    10,
-]
+outer.top = [{ monitor."Built-in Retina Display" = 0 }, 10]

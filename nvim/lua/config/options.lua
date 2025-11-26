@@ -8,3 +8,4 @@ vim.opt_local.expandtab = true
 vim.opt_local.autoindent = true
 vim.opt_local.smarttab = true
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.opt.clipboard = "unnamedplus"

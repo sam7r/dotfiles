@@ -1,0 +1,6 @@
+#! /bin/bash
+
+nohup env DBUS_FATAL_WARNINGS=0 gamemoderun steam -system-composer >/dev/null 2>&1 &
+sleep 0.5
+# Kill the terminal emulator by walking up the process tree
+kill "$(ps -o ppid= -p $PPID | tr -d ' ')"

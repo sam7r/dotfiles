@@ -34,6 +34,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# Stop the screen from going to sleep
+exec --no-startup-id xset -dpms
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -185,71 +188,13 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-#set $mode_gaps Gaps: (o) outer, (i) inner
-#set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-#set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-#bindsym $mod+Shift+g mode "$mode_gaps"
-#
-#mode "$mode_gaps" {
-#        bindsym o      mode "$mode_gaps_outer"
-#        bindsym i      mode "$mode_gaps_inner"
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
-#
-#mode "$mode_gaps_inner" {
-#        bindsym plus  gaps inner current plus 5
-#        bindsym minus gaps inner current minus 5
-#        bindsym 0     gaps inner current set 0
-#
-#        bindsym Shift+plus  gaps inner all plus 5
-#        bindsym Shift+minus gaps inner all minus 5
-#        bindsym Shift+0     gaps inner all set 0
-#
-#
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
-#mode "$mode_gaps_outer" {
-#        bindsym plus  gaps outer current plus 5
-#        bindsym minus gaps outer current minus 5
-#        bindsym 0     gaps outer current set 0
-#
-#        bindsym Shift+plus  gaps outer all plus 5
-#        bindsym Shift+minus gaps outer all minus 5
-#        bindsym Shift+0     gaps outer all set 0
-#
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
-
 gaps inner 10
 gaps top -5
 
-#workspace $ws1 gaps inner 0
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-#      #status_command i3status
-#      colors {
-#        background #282A36
-#        statusline #F8F8F2
-#        separator  #44475A
-#
-#        focused_workspace  #44475A #44475A #F8F8F2
-#        active_workspace   #282A36 #44475A #F8F8F2
-#        inactive_workspace #282A36 #282A36 #BFBFBF
-#        urgent_workspace   #FF5555 #FF5555 #F8F8F2
-#        binding_mode       #FF5555 #FF5555 #F8F8F2
-#  }
-#}
-
 for_window[class=".*"] border pixel 1
+
 exec_always --no-startup-id killall picom -b
 exec_always --no-startup-id picom -b
-# exec_always --no-startup-id ~/start_xbindkeys.sh
-# exec_always --no-startup-id mpd
 
 exec_always --no-startup-id feh --bg-fill /home/sam/Wallpapers/wallhaven-x1kpl3.jpg
 
@@ -265,19 +210,6 @@ exec_always --no-startup-id gsettings set org.gnome.desktop.interface cursor-siz
 
 exec_always --no-startup-id xrdb -merge ~/.Xresources
 exec_always --no-startup-id xrandr --output HDMI-1 --mode 3840x2160 --rate 120 --pos 3840x0 --rotate normal --dpi 192
-
-# Workspace startup 
-## [Basic Autostart]
-#exec_always --no-startup-id /usr/bin/google-chrome-stable
-#exec_always --no-startup-id /usr/bin/wezterm start --cwd ~/Code
-#exec_always --no-startup-id /usr/bin/gimp
-#exec_always --no-startup-id /usr/bin/spotify-launcher
-
-## [Assign apps to workspaces]
-#assign      [class="Google-chrome"]         $ws1
-#assign      [class="org.wezfurlong.wezterm"]   $ws2
-#assign      [class="Gimp"] $ws3
-#for_window  [class="Spotify"] move to workspace $ws4
 
 # class                 border  bground text    indicator child_border
 client.focused          #7d7d7d #7d7d7d #282A36 #7d7d7d   #7d7d7d

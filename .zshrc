@@ -65,10 +65,7 @@ fi
 
 alias gitrsubs="git submodule foreach 'git fetch origin --tags; git checkout master; git pull' && git pull && git submodule update --init --recursive"
 alias vim="nvim"
-alias ewd="cd ~/Code/efcloud"
-alias vnote="cd ~/Notes && vim ."
 alias ls="eza --icons=always"
-alias cd="z"
 alias gotest="go test -race ./..."
 
 

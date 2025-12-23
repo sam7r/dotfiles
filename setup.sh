@@ -1,12 +1,14 @@
 #!/bin/bash
 
-git clone https://github.com/sam7r/dotfiles.git
-# TODO: mv configs to all the right places!
+echo "syncing configs to local"
+./sync.sh --to-local
 
-install_packages() {
+install_packages_linux() {
 	sudo pacman -Syu --noconfirm base-devel
 	sudo pacman -S --noconfirm \
+		atuin \
 		eza \
+		carapace \
 		fd \
 		fzf \
 		lazygit \
@@ -18,11 +20,38 @@ install_packages() {
 		thefuck \
 		tree \
 		tree-sitter-cli \
+		vivid \
 		zoxide \
 		xclip
 
 	sudo pacman -S --noconfirm go nvm terraform pyenv python-argcomplete
 	sudo pacman -S --noconfirm ttf-firacode-nerd ttf-victor-mono-nerd
+}
+
+install_packages_mac() {
+	if ! command -v brew &>/dev/null; then
+		echo "Installing Homebrew..."
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	fi
+
+	brew install \
+		atuin \
+		eza \
+		carapace \
+		fd \
+		fzf \
+		lazygit \
+		make \
+		neovim \
+		ripgrep \
+		starship \
+		thefuck \
+		tree \
+		tree-sitter \
+		zoxide
+
+	brew install go nvm terraform pyenv
+	brew install --cask font-fira-code-nerd font-victor-mono-nerd
 }
 
 install_omzshplugins() {
@@ -46,10 +75,14 @@ if [[ $(uname) == "Linux" ]]; then
 		sudo pacman-key --init
 		sudo pacman-key --populate archlinux holosudo
 		distrobox create -n devbox -i archlinux
-		distrobox enter devbox -- bash -c "$(declare -f install_packages); install_packages"
+		distrobox enter devbox -- bash -c "$(declare -f install_packages_linux); install_packages_linux"
 		distrobox enter devbox -- bash -c "$(declare -f install_omzshplugins); install_omzshplugins"
 	else
-		install_packages
+		install_packages_linux
 		install_omzshplugins
 	fi
+elif [[ $(uname) == "Darwin" ]]; then
+	echo "installing mac deps..."
+	install_packages_mac
+	install_omzshplugins
 fi

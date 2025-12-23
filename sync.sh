@@ -76,6 +76,11 @@ sync_to() {
         cp -r atuin "$HOME/.config/"
     fi
     
+    if [ -f ".zshrc" ]; then
+        print_status "Syncing .zshrc..."
+        cp .zshrc "$HOME/"
+    fi
+    
     # Mac-specific configs
     if [ "$OS_TYPE" = "mac" ]; then
         print_status "Syncing Mac-specific configs..."
@@ -163,6 +168,11 @@ sync_from() {
         print_status "Syncing atuin config from .config..."
         rm -rf atuin
         cp -r "$HOME/.config/atuin" .
+    fi
+    
+    if [ -f "$HOME/.zshrc" ]; then
+        print_status "Syncing .zshrc from home..."
+        cp "$HOME/.zshrc" .
     fi
     
     # Mac-specific configs

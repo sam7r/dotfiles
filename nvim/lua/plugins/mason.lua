@@ -6,10 +6,8 @@ return {
             ensure_installed = {
                 "bash-language-server",
                 "buf",
-                "css-lsp",
                 "delve",
                 "dotenv-linter",
-                "flake8",
                 "gofumpt",
                 "goimports",
                 "golines",
@@ -21,7 +19,7 @@ return {
                 "hadolint",
                 "html-lsp",
                 "htmlhint",
-                "impl",
+                "impl", -- go code actions
                 "js-debug-adapter",
                 "json-lsp",
                 "jsonlint",
@@ -30,7 +28,6 @@ return {
                 "markdownlint-cli2",
                 "marksman",
                 "prettier",
-                "pyright",
                 "shellcheck",
                 "shfmt",
                 "stylua",

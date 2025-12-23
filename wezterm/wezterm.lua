@@ -7,11 +7,11 @@ local config = wezterm.config_builder()
 require("tabs").setup(config)
 
 return {
-	font_size = 15,
+	font_size = 16,
 	default_cursor_style = "BlinkingBar",
 	cursor_blink_ease_in = "Constant",
 	cursor_blink_ease_out = "Constant",
-	line_height = 1,
+	line_height = 1.0,
 	window_background_opacity = 0.95,
 	macos_window_background_blur = 20,
 	-- tab bar

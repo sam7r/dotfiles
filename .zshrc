@@ -33,10 +33,11 @@ plugins=(
 	git-prompt
 	zsh-kubectl-prompt
 	autoupdate
-  zsh-nvm
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  evalcache
+    zsh-nvm
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    evalcache
+    direnv
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -66,8 +67,8 @@ fi
 alias gitrsubs="git submodule foreach 'git fetch origin --tags; git checkout master; git pull' && git pull && git submodule update --init --recursive"
 alias vim="nvim"
 alias ls="eza --icons=always"
+alias cd="z"
 alias gotest="go test -race ./..."
-
 
 autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}"
@@ -144,7 +145,6 @@ bindkey '^e' edit-command-line
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
 export ANDROID_HOME="$HOME/Android/Sdk"
-. "$HOME/.deno/env"
 
 # Local language bins
 export PATH=~/.netrc:$PATH
@@ -157,11 +157,19 @@ autoload -Uz compinit && compinit
 
 source <(kubectl completion zsh)
 
+
+# Carapace setup
+export LS_COLORS="$(vivid generate tokyonight-moon)"
+export CARAPACE_BRIDGES='zsh,bash' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+
 _evalcache starship init zsh
 _evalcache thefuck --alias
 _evalcache zoxide init zsh
 _evalcache pyenv init - zsh
 _evalcache register-python-argcomplete --no-defaults exegol
+_evalcache atuin init zsh
 
 if [[ `uname` == "Linux" ]]; then
     alias sdn="shutdown -h now"
@@ -169,9 +177,10 @@ if [[ `uname` == "Linux" ]]; then
 fi
 
 if [[ `uname` == "Darwin" ]]; then
-  export PATH=/opt/homebrew/bin:$PATH
-  complete -C '/opt/homebrew/bin/aws_completer' aws
-  complete -C '/opt/homebrew/bin/aws_completer' awslocal
+    alias ls="gls --color"
+    export PATH=/opt/homebrew/bin:$PATH
+    complete -C '/opt/homebrew/bin/aws_completer' aws
+    complete -C '/opt/homebrew/bin/aws_completer' awslocal
 fi
 
 if [[ "$ZPROF" = true ]]; then

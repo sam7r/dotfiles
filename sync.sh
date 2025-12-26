@@ -38,6 +38,42 @@ esac
 
 print_status "Detected OS: $OS_TYPE"
 
+# Check if rsync is available
+if ! command -v rsync &> /dev/null; then
+    print_error "rsync is not installed or not in PATH. Please install rsync first."
+    exit 1
+fi
+print_status "rsync is available"
+
+# Function to sync directories using rsync
+sync_dir() {
+    local source="$1"
+    local dest="$2"
+    local desc="$3"
+    local dry_run_flag=""
+    
+    # Check for dry run mode
+    if [ "$DRY_RUN" = "true" ]; then
+        dry_run_flag="--dry-run"
+        print_status "[DRY RUN] Would sync $desc..."
+    else
+        print_status "Syncing $desc..."
+    fi
+    
+    # Create destination directory if it doesn't exist
+    mkdir -p "$(dirname "$dest")"
+    
+    # Use rsync with archive mode, verbose output, and optional dry run
+    if rsync -av --delete $dry_run_flag "$source" "$dest"; then
+        if [ "$DRY_RUN" != "true" ]; then
+            print_status "$desc synced successfully"
+        fi
+    else
+        print_error "Failed to sync $desc"
+        return 1
+    fi
+}
+
 # Function to sync configs to local .config
 sync_to() {
     print_status "Syncing configs to local .config directory..."
@@ -47,15 +83,11 @@ sync_to() {
     
     # Common configs for both Mac and Linux
     if [ -d "nvim" ]; then
-        print_status "Syncing nvim config..."
-        rm -rf "$HOME/.config/nvim"
-        cp -r nvim "$HOME/.config/"
+        sync_dir "nvim/" "$HOME/.config/nvim/" "nvim config"
     fi
     
     if [ -d "yazi" ]; then
-        print_status "Syncing yazi config..."
-        rm -rf "$HOME/.config/yazi"
-        cp -r yazi "$HOME/.config/"
+        sync_dir "yazi/" "$HOME/.config/yazi/" "yazi config"
     fi
     
     if [ -f "starship/starship.toml" ]; then
@@ -64,16 +96,12 @@ sync_to() {
         cp starship/starship.toml "$HOME/.config/starship/"
     fi
     
-    if [ -f "wezterm/wezterm.lua" ]; then
-        print_status "Syncing wezterm config..."
-        mkdir -p "$HOME/.config/wezterm"
-        cp wezterm/wezterm.lua "$HOME/.config/"
+    if [ -d "wezterm" ]; then
+        sync_dir "wezterm/" "$HOME/.config/wezterm/" "wezterm config"
     fi
     
     if [ -d "atuin" ]; then
-        print_status "Syncing atuin config..."
-        rm -rf "$HOME/.config/atuin"
-        cp -r atuin "$HOME/.config/"
+        sync_dir "atuin/" "$HOME/.config/atuin/" "atuin config"
     fi
     
     if [ -f ".zshrc" ]; then
@@ -86,9 +114,7 @@ sync_to() {
         print_status "Syncing Mac-specific configs..."
         
         if [ -d "sketchybar" ]; then
-            print_status "Syncing sketchybar config..."
-            rm -rf "$HOME/.config/sketchybar"
-            cp -r sketchybar "$HOME/.config/"
+            sync_dir "sketchybar/" "$HOME/.config/sketchybar/" "sketchybar config"
         fi
         
         if [ -f ".aerospace.toml" ]; then
@@ -102,21 +128,15 @@ sync_to() {
         print_status "Syncing Linux-specific configs..."
         
         if [ -d "i3" ]; then
-            print_status "Syncing i3 config..."
-            mkdir -p "$HOME/.config/i3"
-            cp i3/config "$HOME/.config/i3/"
+            sync_dir "i3/" "$HOME/.config/i3/" "i3 config"
         fi
         
         if [ -d "polybar" ]; then
-            print_status "Syncing polybar config..."
-            rm -rf "$HOME/.config/polybar"
-            cp -r polybar "$HOME/.config/"
+            sync_dir "polybar/" "$HOME/.config/polybar/" "polybar config"
         fi
         
         if [ -d "rofi" ]; then
-            print_status "Syncing rofi config..."
-            mkdir -p "$HOME/.config/rofi"
-            cp rofi/config.rasi "$HOME/.config/rofi/"
+            sync_dir "rofi/" "$HOME/.config/rofi/" "rofi config"
         fi
         
         if [ -f "picom/picom.conf" ]; then
@@ -141,15 +161,11 @@ sync_from() {
     
     # Common configs for both Mac and Linux
     if [ -d "$HOME/.config/nvim" ]; then
-        print_status "Syncing nvim config from .config..."
-        rm -rf nvim
-        cp -r "$HOME/.config/nvim" .
+        sync_dir "$HOME/.config/nvim/" "nvim/" "nvim config from .config"
     fi
     
     if [ -d "$HOME/.config/yazi" ]; then
-        print_status "Syncing yazi config from .config..."
-        rm -rf yazi
-        cp -r "$HOME/.config/yazi" .
+        sync_dir "$HOME/.config/yazi/" "yazi/" "yazi config from .config"
     fi
     
     if [ -f "$HOME/.config/starship/starship.toml" ]; then
@@ -158,16 +174,12 @@ sync_from() {
         cp "$HOME/.config/starship/starship.toml" starship/
     fi
     
-    if [ -f "$HOME/.config/wezterm/wezterm.lua" ]; then
-        print_status "Syncing wezterm config from .config..."
-        mkdir -p wezterm
-        cp "$HOME/.config/wezterm/wezterm.lua" wezterm/
+    if [ -d "$HOME/.config/wezterm" ]; then
+        sync_dir "$HOME/.config/wezterm/" "wezterm/" "wezterm config from .config"
     fi
     
     if [ -d "$HOME/.config/atuin" ]; then
-        print_status "Syncing atuin config from .config..."
-        rm -rf atuin
-        cp -r "$HOME/.config/atuin" .
+        sync_dir "$HOME/.config/atuin/" "atuin/" "atuin config from .config"
     fi
     
     if [ -f "$HOME/.zshrc" ]; then
@@ -180,9 +192,7 @@ sync_from() {
         print_status "Syncing Mac-specific configs from .config..."
         
         if [ -d "$HOME/.config/sketchybar" ]; then
-            print_status "Syncing sketchybar config from .config..."
-            rm -rf sketchybar
-            cp -r "$HOME/.config/sketchybar" .
+            sync_dir "$HOME/.config/sketchybar/" "sketchybar/" "sketchybar config from .config"
         fi
         
         if [ -f "$HOME/.config/aerospace.toml" ]; then
@@ -196,21 +206,15 @@ sync_from() {
         print_status "Syncing Linux-specific configs from .config..."
         
         if [ -d "$HOME/.config/i3" ]; then
-            print_status "Syncing i3 config from .config..."
-            mkdir -p i3
-            cp "$HOME/.config/i3/config" i3/
+            sync_dir "$HOME/.config/i3/" "i3/" "i3 config from .config"
         fi
         
         if [ -d "$HOME/.config/polybar" ]; then
-            print_status "Syncing polybar config from .config..."
-            rm -rf polybar
-            cp -r "$HOME/.config/polybar" .
+            sync_dir "$HOME/.config/polybar/" "polybar/" "polybar config from .config"
         fi
         
         if [ -d "$HOME/.config/rofi" ]; then
-            print_status "Syncing rofi config from .config..."
-            mkdir -p rofi
-            cp "$HOME/.config/rofi/config.rasi" rofi/
+            sync_dir "$HOME/.config/rofi/" "rofi/" "rofi config from .config"
         fi
         
         if [ -f "$HOME/.config/picom/picom.conf" ]; then
@@ -231,25 +235,66 @@ sync_from() {
 
 # Function to show usage
 show_usage() {
-    echo "Usage: $0 [--to-local|-t|--from-local|-f]"
+    echo "Usage: $0 [--to-local|-t|--from-local|-f] [--dry-run|-n]"
     echo ""
     echo "Options:"
     echo "  --to-local, -t    Sync configs from dotfiles to local .config directory"
     echo "  --from-local, -f  Sync configs from local .config directory to dotfiles"
+    echo "  --dry-run, -n     Show what would be synced without actually doing it (use with --to-local or --from-local)"
     echo ""
     echo "This script automatically detects Mac or Linux and syncs the appropriate configs."
+    echo "Uses rsync for efficient directory syncing and cp for single files."
+    echo ""
+    echo "Examples:"
+    echo "  $0 --to-local          # Sync to local .config"
+    echo "  $0 --from-local        # Sync from local .config"
+    echo "  $0 --to-local --dry-run # Preview sync to local .config"
 }
 
-# Main script logic
-case "$1" in
-    --to-local|-t)
+# Set dry run flag
+DRY_RUN="false"
+SYNC_DIRECTION=""
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --to-local|-t)
+            SYNC_DIRECTION="to"
+            shift
+            ;;
+        --from-local|-f)
+            SYNC_DIRECTION="from"
+            shift
+            ;;
+        --dry-run|-n)
+            DRY_RUN="true"
+            shift
+            ;;
+        *)
+            show_usage
+            exit 1
+            ;;
+    esac
+done
+
+# Check if sync direction was specified
+if [ -z "$SYNC_DIRECTION" ]; then
+    echo "Error: Must specify --to-local or --from-local"
+    echo ""
+    show_usage
+    exit 1
+fi
+
+# Execute the appropriate sync function
+if [ "$DRY_RUN" = "true" ]; then
+    print_status "DRY RUN MODE: Showing what would be synced without making changes"
+fi
+
+case "$SYNC_DIRECTION" in
+    to)
         sync_to
         ;;
-    --from-local|-f)
+    from)
         sync_from
-        ;;
-    *)
-        show_usage
-        exit 1
         ;;
 esac

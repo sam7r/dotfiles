@@ -9,6 +9,7 @@ install_packages_linux() {
 		atuin \
 		eza \
 		carapace \
+		direnv \
 		fd \
 		fzf \
 		lazygit \

@@ -1,0 +1,49 @@
+# [Created by task 3.4.2 12/25/2025 23:24:02]
+news.version=3.4.2
+
+# To use the default location of the XDG directories,
+# move this configuration file from ~/.taskrc to ~/.config/task/taskrc and update location config as follows:
+data.location=~/.task
+hooks.location=~/.task/hooks
+
+# Color theme
+include ~/.task/themes/taskwarrior.theme
+
+weekstart=monday
+
+# Size UDA
+uda.size.type=string
+uda.size.label=Size
+uda.size.values=xl,l,m,s,xs
+uda.size.default=m
+urgency.uda.size.coefficient=2.8
+
+# Jira ID UDA
+uda.jira_id.type=string
+uda.jira_id.label=Jira ID
+
+# Reset priority to downgrade L(ow)
+uda.priority.values=H,M,,L
+
+# Shortcuts
+alias.today=all status:completed end.after:today
+alias.yesterday=all status:completed end:yesterday
+alias.punt=modify wait:1d
+alias.c=context
+alias.cc=context none
+
+# Make searches case insensitive, personal preference
+search.case.sensitive=no
+
+# Set daily burndown as default
+alias.burndown=burndown.daily
+
+# Task ready report default with custom columns
+default.command=ready
+report.ready.columns=id,start.active,depends.indicator,project,jira_id,due.relative,description.desc,size,priority
+report.ready.labels= ,,Depends, Project, Jira ID, Due, Description, Size, Priority
+
+## Contexts
+context.dev=+dev or +story or +ticket or +bug or +task or +planning or jira_id.any:
+context.focus=+focus or +onboarding or +course or +learning
+context.admin=+admin or +config or +setup or +dot

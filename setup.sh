@@ -15,15 +15,18 @@ install_packages_linux() {
 		lazygit \
 		make \
 		neovim \
+		obsidian \
 		packer \
 		ripgrep \
 		starship \
+		task \
+		timewarrior \
 		thefuck \
 		tree \
 		tree-sitter-cli \
 		vivid \
-		zoxide \
-		xclip
+		xclip \
+		zoxide
 
 	sudo pacman -S --noconfirm go nvm terraform pyenv python-argcomplete
 	sudo pacman -S --noconfirm ttf-firacode-nerd ttf-victor-mono-nerd
@@ -44,8 +47,11 @@ install_packages_mac() {
 		lazygit \
 		make \
 		neovim \
+		obsidian \
 		ripgrep \
 		starship \
+		task \
+		timewarrior \
 		thefuck \
 		tree \
 		tree-sitter \
@@ -67,6 +73,8 @@ install_omzshplugins() {
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	# evalcache
 	git clone https://github.com/mroth/evalcache ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/evalcache
+	# timewarrior
+	git clone https://github.com/svenXY/timewarrior ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/timewarrior
 }
 
 if [[ $(uname) == "Linux" ]]; then

@@ -2,7 +2,7 @@
 if [[ "$ZPROF" = true ]]; then
   zmodload zsh/zprof
 fi
-
+ 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.local/bin:$PATH
 if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then export FPATH="$HOME/.zsh/completions:$FPATH"; fi
@@ -38,6 +38,8 @@ plugins=(
     zsh-syntax-highlighting
     evalcache
     direnv
+    taskwarrior
+    timewarrior
 )
 
 source $ZSH/oh-my-zsh.sh

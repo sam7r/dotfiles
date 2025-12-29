@@ -15,10 +15,14 @@ $php\
 [](fg:#212736 bg:#1d2230)\
 $kubernetes\
 [ ](fg:#1d2230)\
-$fill\
+ $fill\
+[](fg:#212736)\
 ${custom.timewarrior_timer}\
+[](fg:#394260 bg:#212736)\
 ${custom.task_context}\
+[](fg:#b9eb81 bg:#394260)\
 ${custom.task_count_pending}\
+[▓▒░](#b9eb81)\
 \n\n$character"""
 
 [directory]
@@ -91,7 +95,8 @@ command = "task count rc.gc=off rc.verbose=nothing status:pending"
 when = "which task"
 symbol = "󰣉 "
 description = "Count of pending Taskwarrior tasks"
-format = '[[ $symbol$output ]()]()'
+style = "bg:#394260"
+format = '[[ $symbol$output ](fg:#1d2230 bg:#b9eb81)]($style)'
 
 [fill]
 symbol = ' '
@@ -99,8 +104,10 @@ symbol = ' '
 [custom.task_context]
 command = "task _get rc.context"
 when = "which task"
+symbol = "󰔚 "
 description = "Show current Taskwarrior context"
-format = '[[ $symbol$output ]()]()'
+style = "bg:#212736"
+format = '[[ $symbol$output ](fg:#a0a9cb bg:#394260)]($style)'
 
 
 [custom.timewarrior_timer]
@@ -112,4 +119,5 @@ fi
 when = "which timew"
 symbol = ""
 description = "Show current timewarrior timer if active"
-format = '[[ $output ]($style)]()'
+style = "bg:#212736"
+format = '[[ $output ](fg:#b9eb81 bg:#212736)]($style)'

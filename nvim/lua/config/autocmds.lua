@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd("User", {
         local dashboard_on_empty = deleted_name == "" and deleted_ft == "" and deleted_bt == ""
 
         if dashboard_on_empty then
-            vim.cmd("Dashboard")
+            vim.cmd("lua Snacks.dashboard()")
         end
     end,
 })

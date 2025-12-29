@@ -15,6 +15,10 @@ $php\
 [](fg:#212736 bg:#1d2230)\
 $kubernetes\
 [ ](fg:#1d2230)\
+$fill\
+${custom.timewarrior_timer}\
+${custom.task_context}\
+${custom.task_count_pending}\
 \n\n$character"""
 
 [directory]
@@ -81,3 +85,31 @@ disabled = false
 time_format = "%R"                                      # Hour:Minute Format
 style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+
+[custom.task_count_pending]
+command = "task count rc.gc=off rc.verbose=nothing status:pending"
+when = "which task"
+symbol = "󰣉 "
+description = "Count of pending Taskwarrior tasks"
+format = '[[ $symbol$output ]()]()'
+
+[fill]
+symbol = ' '
+
+[custom.task_context]
+command = "task _get rc.context"
+when = "which task"
+description = "Show current Taskwarrior context"
+format = '[[ $symbol$output ]()]()'
+
+
+[custom.timewarrior_timer]
+command = """
+if command -v timew >/dev/null 2>&1 && [ "$(timew get dom.active)" = "1" ]; then
+  timew | grep "Total" | awk '{print "⏱ " $2}'
+fi
+"""
+when = "which timew"
+symbol = ""
+description = "Show current timewarrior timer if active"
+format = '[[ $output ]($style)]()'

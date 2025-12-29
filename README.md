@@ -7,7 +7,7 @@ Personal dotfiles configuration for macOS and Linux systems.
 ### Clone and Setup
 
 ```bash
-git clone <repository-url> ~/dotfiles
+git clone https://github.com/sam7r/dotfiles.git
 cd ~/dotfiles
 ./setup.sh
 ```
@@ -15,6 +15,9 @@ cd ~/dotfiles
 ### Sync Configurations
 
 Use the sync script to manage configurations between this repository and your system:
+
+> [!IMPORTANT]
+> It's recommended to run `--from-local` first to avoid loosing any configuration you may want to keep, examine the changes and amend as needed before syncing `--to-local`.
 
 ```bash
 # Sync from dotfiles to local config
@@ -26,7 +29,8 @@ Use the sync script to manage configurations between this repository and your sy
 
 ## Platform Support
 
-> [!NOTE] Setup covers the tools and configurations, platform specific window managers and status bars aren't covered at the moment.
+> [!NOTE]
+> Setup covers the tools and configurations, platform specific window managers and status bars aren't covered at the moment.
 
 ### macOS
 
@@ -59,6 +63,7 @@ distrobox enter devbox
 - **Shell Tools**: eza, zoxide, fzf etc...
 - **Editor**: Neovim with LazyVim configuration
 - **File Manager**: Yazi
+- **Task Manager**: Taskwarrior, Timewarrior
 
 ## Keybindings
 
@@ -89,27 +94,6 @@ distrobox enter devbox
 |                          | `k` = expand height, `j` = shrink height |
 | Resize mode exit         | `Escape` or `Enter`                      |
 | Reload config            | `Alt + Shift + c`                        |
-
-### Session Management
-
-WezTerm and LazyVim provide session management features that allow for easy resume of workspaces and terminal sessions after system or app restarts.
-
-**WezTerm**:
-
-- Workspaces are named and can be created dynamically
-- Automatic session saving every 5 minutes
-- Full workspace state restoration including:
-  - Pane layouts and positioning
-  - Working directories
-  - Command history
-  - Tab organization
-- **Save Session**: `Leader + S` - Manually save current workspace state (uses workspace name)
-- **Load Session**: `Leader + T` - Fuzzy search and restore saved sessions
-- **Delete Session**: `Leader + D` - Remove saved sessions
-- Sessions are organized by workspace names for easy identification
-
-When creating a new workspace (`Leader + Q`), existing saved state for that name is automatically restored.
-This means, combined with LazyVim's session management, users can maintain their coding environment across reboots by either remembering the workspace name or using the fuzzy search from saved sessions and using that as the workspace name.
 
 ### WezTerm Terminal
 
@@ -142,6 +126,49 @@ This means, combined with LazyVim's session management, users can maintain their
 |                          | Resize mode: `j`      | Shrink height                     |
 |                          | Resize mode: `Escape` | Exit resize mode                  |
 
-## Contributing
+## Features
+
+### Session Management
+
+WezTerm and LazyVim provide session management features that allow for easy resume of workspaces and terminal sessions after system or app restarts.
+
+**WezTerm**:
+
+- Workspaces are named and can be created dynamically
+- Automatic session saving every 5 minutes
+- Full workspace state restoration including:
+  - Pane layouts and positioning
+  - Working directories
+  - Command history
+  - Tab organization
+- **Save Session**: `Leader + S` - Manually save current workspace state (uses workspace name)
+- **Load Session**: `Leader + T` - Fuzzy search and restore saved sessions
+- **Delete Session**: `Leader + D` - Remove saved sessions
+- Sessions are organized by workspace names for easy identification
+
+When creating a new workspace (`Leader + Q`), existing saved state for that name is automatically restored.
+This means, combined with LazyVim's session management, users can maintain their coding environment across reboots by either remembering the workspace name or using the fuzzy search from saved sessions and using that as the workspace name.
+
+### Task Management
+
+Configurations exist for Taskwarrior and Timewarrior to manage tasks and time tracking directly from the terminal.
+
+A hook is included to automatically start Timewarrior tracking when a Taskwarrior task is started.
+
+You can view the time reports by task tag using the custom Timewarrior report.
+
+> [!NOTE]
+> zsh plugins are included to provide autocompletion and aliases for both Taskwarrior and Timewarrior.
+>
+> - `timew -> tw`
+> - `task -> t`
+
+```sh
+tw report totals :week
+```
+
+Starship prompt is also configured to show the task count, context and an active timer.
+
+---
 
 This is a personal dotfiles repository. Feel free to fork and adapt for your own use.

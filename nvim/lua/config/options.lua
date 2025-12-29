@@ -10,5 +10,4 @@ vim.opt_local.smarttab = true
 vim.opt.textwidth = 80
 vim.opt.clipboard = "unnamedplus"
 
-vim.o.conceallevel = 1
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

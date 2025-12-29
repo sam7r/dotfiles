@@ -113,7 +113,7 @@ return {
                 -- Padding to add to the left of checkboxes.
                 left_pad = 0,
                 -- Padding to add to the right of checkboxes.
-                right_pad = 0,
+                right_pad = 1,
                 unchecked = {
                     -- Replaces '[ ]' of 'task_list_marker_unchecked'.
                     icon = "󰄱 ",

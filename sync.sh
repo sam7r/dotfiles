@@ -92,7 +92,6 @@ sync_to() {
 
 	if [ -f "starship/starship.toml" ]; then
 		print_status "Syncing starship config..."
-		mkdir -p "$HOME/.config/starship"
 		cp starship/starship.toml "$HOME/.config/"
 	fi
 
@@ -109,6 +108,23 @@ sync_to() {
 		cp .zshrc "$HOME/"
 	fi
 
+	if [ -d "taskwarrior" ]; then
+		print_status "Syncing taskwarrior..."
+		cp .taskrc "$HOME/"
+		mkdir -p "$HOME/.task"
+		# syncing individual dirs to avoid issues with data
+		sync_dir "taskwarrior/hooks/" "$HOME/.task/hooks/" "taskwarrior hooks"
+		sync_dir "taskwarrior/themes/" "$HOME/.task/themes/" "taskwarrior themes"
+	fi
+
+	if [ -d "timewarrior" ]; then
+		print_status "Syncing timewarrior..."
+		mkdir -p "$HOME/.timewarrior"
+		cp timewarrior/timewarrior.cfg "$HOME/.timewarrior/"
+		# syncing individual dir to avoid issues with data
+		sync_dir "timewarrior/extensions/" "$HOME/.timewarrior/extensions/" "timewarrior extensions"
+	fi
+
 	# Mac-specific configs
 	if [ "$OS_TYPE" = "mac" ]; then
 		print_status "Syncing Mac-specific configs..."
@@ -119,7 +135,7 @@ sync_to() {
 
 		if [ -f ".aerospace.toml" ]; then
 			print_status "Syncing aerospace config..."
-			cp .aerospace.toml "$HOME/.config/"
+			cp .aerospace.toml "$HOME/"
 		fi
 	fi
 
@@ -168,7 +184,7 @@ sync_from() {
 		sync_dir "$HOME/.config/yazi/" "yazi/" "yazi config from .config"
 	fi
 
-	if [ -f "$HOME/.config/starship/starship.toml" ]; then
+	if [ -f "$HOME/.config/starship.toml" ]; then
 		print_status "Syncing starship config from .config..."
 		mkdir -p starship
 		cp "$HOME/.config/starship.toml" starship/
@@ -187,6 +203,21 @@ sync_from() {
 		cp "$HOME/.zshrc" .
 	fi
 
+	if [ -f "$HOME/.taskrc" ]; then
+		print_status "Syncing .taskrc from home..."
+		mkdir -p taskwarrior
+		cp "$HOME/.taskrc" .
+		cp -r "$HOME/.task/hooks" taskwarrior/
+		cp -r "$HOME/.task/themes" taskwarrior/
+	fi
+
+	if [ -d "$HOME/.timewarrior" ]; then
+		print_status "Syncing .timewarrior from home..."
+		mkdir -p timewarrior
+		cp "$HOME/.timewarrior/timewarrior.cfg" timewarrior/
+		cp -r "$HOME/.timewarrior/extensions" timewarrior/
+	fi
+
 	# Mac-specific configs
 	if [ "$OS_TYPE" = "mac" ]; then
 		print_status "Syncing Mac-specific configs from .config..."
@@ -195,9 +226,9 @@ sync_from() {
 			sync_dir "$HOME/.config/sketchybar/" "sketchybar/" "sketchybar config from .config"
 		fi
 
-		if [ -f "$HOME/.config/aerospace.toml" ]; then
-			print_status "Syncing aerospace config from .config..."
-			cp "$HOME/.config/aerospace.toml" .
+		if [ -f "$HOME/.aerospace.toml" ]; then
+			print_status "Syncing aerospace config from home..."
+			cp "$HOME/.aerospace.toml" .
 		fi
 	fi
 

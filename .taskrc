@@ -31,6 +31,8 @@ alias.yesterday=all status:completed end:yesterday
 alias.punt=modify wait:1d
 alias.c=context
 alias.cc=context none
+alias.as=+ACTIVE stop
+alias.ad=+ACTIVE done
 
 # Make searches case insensitive, personal preference
 search.case.sensitive=no
@@ -42,6 +44,12 @@ alias.burndown=burndown.daily
 default.command=ready
 report.ready.columns=id,start.active,depends.indicator,project,jira_id,due.relative,description.desc,size,priority
 report.ready.labels= ,,Depends, Project, Jira ID, Due, Description, Size, Priority
+
+# Currently active name
+report.a.description='Currently active task'
+report.a.columns=description
+report.a.labels=Active task
+report.a.filter=+ACTIVE
 
 ## Contexts
 context.dev=+dev or +story or +ticket or +bug or +task or +planning or jira_id.any:

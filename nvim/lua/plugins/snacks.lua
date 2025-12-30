@@ -5,24 +5,6 @@ return {
         opts = {
             dashboard = {
                 enabled = true,
-                preset = {
-                    keys = {
-                        {
-                            icon = " ",
-                            key = "c",
-                            desc = "Config",
-                            action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-                        },
-                        {
-                            icon = "󰒲 ",
-                            key = "l",
-                            desc = "Lazy",
-                            action = ":Lazy",
-                            enabled = package.loaded.lazy ~= nil,
-                        },
-                        { icon = " ", key = "x", desc = "Extras", action = ":LazyExtras" },
-                    },
-                },
                 sections = {
                     {
                         section = "terminal",
@@ -67,7 +49,7 @@ return {
                                 icon = " ",
                                 title = "Git Status",
                                 cmd = "git --no-pager diff --stat -B -M -C",
-                                height = 10,
+                                height = 3,
                             },
                         }
                         return vim.tbl_map(function(cmd)
@@ -76,11 +58,10 @@ return {
                                 enabled = in_git,
                                 padding = 1,
                                 ttl = 5 * 60,
-                                indent = 3,
+                                -- indent = 3,
                             }, cmd)
                         end, cmds)
                     end,
-                    { section = "keys", gap = 1, padding = 1 },
                     { section = "startup" },
                 },
             },

@@ -179,7 +179,6 @@ if [[ `uname` == "Linux" ]]; then
 fi
 
 if [[ `uname` == "Darwin" ]]; then
-    alias ls="gls --color"
     export PATH=/opt/homebrew/bin:$PATH
     complete -C '/opt/homebrew/bin/aws_completer' aws
     complete -C '/opt/homebrew/bin/aws_completer' awslocal

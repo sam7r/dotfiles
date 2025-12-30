@@ -4,7 +4,6 @@ echo "syncing configs to local"
 ./sync.sh --to-local
 
 install_packages_linux() {
-	sudo pacman -Syu --noconfirm base-devel
 	sudo pacman -S --noconfirm \
 		atuin \
 		eza \
@@ -12,6 +11,7 @@ install_packages_linux() {
 		direnv \
 		fd \
 		fzf \
+		github-cli \
 		lazygit \
 		make \
 		neovim \
@@ -20,7 +20,7 @@ install_packages_linux() {
 		ripgrep \
 		starship \
 		task \
-		timewarrior \
+		timew \
 		thefuck \
 		tree \
 		tree-sitter-cli \
@@ -28,8 +28,8 @@ install_packages_linux() {
 		xclip \
 		zoxide
 
-	sudo pacman -S --noconfirm go nvm terraform pyenv python-argcomplete
-	sudo pacman -S --noconfirm ttf-firacode-nerd ttf-victor-mono-nerd
+	sudo pacman -S --noconfirm go nvm tfenv pyenv python-argcomplete
+	sudo pacman -S --noconfirm ttf-firacode-nerd ttf-victor-mono-nerd figlet
 }
 
 install_packages_mac() {
@@ -44,6 +44,7 @@ install_packages_mac() {
 		carapace \
 		fd \
 		fzf \
+		gh \
 		lazygit \
 		make \
 		neovim \
@@ -57,7 +58,7 @@ install_packages_mac() {
 		tree-sitter \
 		zoxide
 
-	brew install go nvm terraform pyenv
+	brew install go nvm tfenv pyenv
 	brew install --cask font-fira-code-nerd font-victor-mono-nerd
 }
 
@@ -83,6 +84,7 @@ if [[ $(uname) == "Linux" ]]; then
 		echo "running on steam deck, setting up distrobox..."
 		sudo pacman-key --init
 		sudo pacman-key --populate archlinux holosudo
+		sudo pacman -Syu --noconfirm base-devel
 		distrobox create -n devbox -i archlinux
 		distrobox enter devbox -- bash -c "$(declare -f install_packages_linux); install_packages_linux"
 		distrobox enter devbox -- bash -c "$(declare -f install_omzshplugins); install_omzshplugins"

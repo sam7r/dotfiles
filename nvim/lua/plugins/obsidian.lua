@@ -3,12 +3,15 @@ return {
         "obsidian-nvim/obsidian.nvim",
         version = "*", -- use latest release, remove to use latest commit
         ft = "markdown",
+        dependencies = {
+            "MeanderingProgrammer/render-markdown.nvim",
+        },
         ---@module 'obsidian'
         ---@type obsidian.config
         opts = {
             legacy_commands = false, -- this will be removed in the next major release
             ui = {
-                enable = false, -- we have markdown-renderer
+                enable = false, -- using render-markdown instead
             },
             workspaces = {
                 {
@@ -16,24 +19,36 @@ return {
                     path = "~/Notes/vault",
                 },
             },
-            callbacks = {
-                enter_note = function(note)
-                    vim.keymap.set("n", "<Tab>", function()
-                        require("obsidian.api").nav_link("next")
-                    end, {
-                        buffer = true,
-                        desc = "Go to next link",
-                    })
-                    vim.keymap.set("n", "<S-Tab>", function()
-                        require("obsidian.api").nav_link("prev")
-                    end, {
-                        buffer = true,
-                        desc = "Go to previous link",
-                    })
-                end,
+            attachments = {
+                img_folder = "/.assets",
             },
             new_notes_location = "notes_subdir",
             notes_subdir = "+Inbox",
+
+            ---@class obsidian.config.TemplateOpts
+            templates = {
+                folder = "99-Templates",
+                date_format = "%Y-%m-%d",
+                time_format = "%H:%M",
+                substitutions = {
+                    daily_date = function()
+                        return vim.fn.strftime("%Y-%m-%d")
+                    end,
+                },
+
+                ---@class obsidian.config.CustomTemplateOpts
+                customizations = {},
+            },
+            ---@class obsidian.config.DailyNotesOpts
+            daily_notes = {
+                folder = "00-Daily",
+                template = "Daily template",
+                date_format = "%Y-%m-%d",
+                alias_format = nil,
+                default_tags = {},
+                workdays_only = true,
+            },
+
             note_id_func = function(title)
                 if title ~= nil and title ~= "" then
                     -- Use the title for the ID, but make it filename-safe
@@ -95,29 +110,6 @@ return {
 
                 return out
             end,
-            ---@class obsidian.config.TemplateOpts
-            templates = {
-                folder = "99-Templates",
-                date_format = "%Y-%m-%d",
-                time_format = "%H:%M",
-                substitutions = {
-                    daily_date = function()
-                        return vim.fn.strftime("%Y-%m-%d")
-                    end,
-                },
-
-                ---@class obsidian.config.CustomTemplateOpts
-                customizations = {},
-            },
-            ---@class obsidian.config.DailyNotesOpts
-            daily_notes = {
-                folder = "00-Daily",
-                template = "Daily template",
-                date_format = "%Y-%m-%d",
-                alias_format = nil,
-                default_tags = {},
-                workdays_only = true,
-            },
         },
     },
 
@@ -130,8 +122,6 @@ return {
                 {
                     mode = "n",
                     { "<leader>o", group = "obsidian", icon = { icon = "󰋘 ", color = "purple" } },
-                    { "<leader>ow", group = "workspace", icon = { icon = "󰕉 ", color = "purple" } },
-                    { "<leader>on", group = "note", icon = { icon = "󰈙 ", color = "purple" } },
                     {
                         "<leader>oo",
                         "<cmd>lua require('obsidian.workspace').set('vault')<cr>",
@@ -139,15 +129,15 @@ return {
                         icon = { icon = "󰒔 ", color = "purple" },
                     },
                     {
-                        "<leader>owc",
-                        "<cmd>Obsidian workspace<cr>",
-                        desc = "Change",
-                        icon = { icon = "󰡊 ", color = "purple" },
+                        "<leader>o/",
+                        "<cmd>Obsidian search<cr>",
+                        desc = "Grep Files",
+                        icon = { icon = "󰈞 ", color = "purple" },
                     },
                     {
-                        "<leader>os",
-                        "<cmd>Obsidian search<cr>",
-                        desc = "Search",
+                        "<leader>o ",
+                        "<cmd>Obsidian quick_switch<cr>",
+                        desc = "Find File",
                         icon = { icon = "󰍉 ", color = "purple" },
                     },
                     {
@@ -168,11 +158,29 @@ return {
                         desc = "Tags",
                         icon = { icon = " ", color = "purple" },
                     },
+
+                    -- workspace bindings
+                    { "<leader>ow", group = "workspace", icon = { icon = " ", color = "purple" } },
+                    {
+                        "<leader>owc",
+                        "<cmd>Obsidian workspace<cr>",
+                        desc = "Change",
+                        icon = { icon = "󰡊 ", color = "purple" },
+                    },
+
+                    -- note bindings
+                    { "<leader>on", group = "note", icon = { icon = " ", color = "purple" } },
                     {
                         "<leader>onn",
                         "<cmd>Obsidian new<cr>",
-                        desc = "New note",
-                        icon = { icon = "󰏪 ", color = "purple" },
+                        desc = "New",
+                        icon = { icon = "󰧮 ", color = "purple" },
+                    },
+                    {
+                        "<leader>ont",
+                        "<cmd>Obsidian new_from_template<cr>",
+                        desc = "New From Template",
+                        icon = { icon = "󰈙 ", color = "purple" },
                     },
                     {
                         "<leader>onb",
@@ -184,7 +192,25 @@ return {
                         "<leader>onl",
                         "<cmd>Obsidian links<cr>",
                         desc = "Links",
-                        icon = { icon = "󰌹 ", color = "purple" },
+                        icon = { icon = "󰴜 ", color = "purple" },
+                    },
+                    {
+                        "<leader>onc",
+                        "<cmd>Obsidian toc<cr>",
+                        desc = "TOC",
+                        icon = { icon = "󰱾 ", color = "purple" },
+                    },
+                    {
+                        "<leader>onr",
+                        "<cmd>Obsidian rename<cr>",
+                        desc = "Rename",
+                        icon = { icon = " ", color = "purple" },
+                    },
+                    {
+                        "<leader>onp",
+                        "<cmd>Obsidian paste_img<cr>",
+                        desc = "Paste Image",
+                        icon = { icon = " ", color = "purple" },
                     },
                 },
                 -- Visual mode bindings
@@ -200,12 +226,19 @@ return {
                     },
                     {
                         "<leader>ovl",
+                        "<cmd>Obsidian link<cr>",
+                        desc = "Link",
+                        icon = { icon = "󰷉 ", color = "purple" },
+                    },
+                    {
+                        "<leader>ovn",
                         "<cmd>Obsidian link_new<cr>",
                         desc = "Link to new",
-                        icon = { icon = " ", color = "purple" },
+                        icon = { icon = "󱪞 ", color = "purple" },
                     },
                 },
             },
+            -- filter to ensure obsidian mappings only show when obsidian is active (workspace initialized)
             filter = function(mapping)
                 -- Check if obsidian workspace is initialized for the session
                 local function obsidian_workspace_active()

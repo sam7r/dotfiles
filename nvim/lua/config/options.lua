@@ -11,3 +11,5 @@ vim.opt.textwidth = 80
 vim.opt.clipboard = "unnamedplus"
 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+vim.g.snacks_animate = false

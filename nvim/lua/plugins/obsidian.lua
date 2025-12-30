@@ -1,58 +1,5 @@
 return {
     {
-        "folke/which-key.nvim",
-        opts = {
-            spec = {
-                {
-                    mode = { "n", "x" },
-                    { "<leader>o", group = "obsidian", icon = { icon = "󰈙 ", color = "purple" } },
-                    {
-                        "<leader>ow",
-                        "<cmd>lua require('obsidian.workspace').set('vault')<cr>",
-                        desc = "Open workspace",
-                        icon = { icon = "󰒔 ", color = "purple" },
-                    },
-                    {
-                        "<leader>os",
-                        "<cmd>Obsidian search<cr>",
-                        desc = "Search",
-                        icon = { icon = "󰍉 ", color = "purple" },
-                    },
-                    {
-                        "<leader>ot",
-                        "<cmd>Obsidian today<cr>",
-                        desc = "Today",
-                        icon = { icon = "󰃭 ", color = "purple" },
-                    },
-                    {
-                        "<leader>od",
-                        "<cmd>Obsidian dailies<cr>",
-                        desc = "Dailies",
-                        icon = { icon = "󰃲 ", color = "purple" },
-                    },
-                    {
-                        "<leader>on",
-                        "<cmd>Obsidian new<cr>",
-                        desc = "New note",
-                        icon = { icon = "󰏪 ", color = "purple" },
-                    },
-                    {
-                        "<leader>ob",
-                        "<cmd>Obsidian backlinks<cr>",
-                        desc = "Backlinks",
-                        icon = { icon = "󰌹 ", color = "purple" },
-                    },
-                    {
-                        "<leader>oT",
-                        "<cmd>Obsidian tags<cr>",
-                        desc = "Tags",
-                        icon = { icon = " ", color = "purple" },
-                    },
-                },
-            },
-        },
-    },
-    {
         "obsidian-nvim/obsidian.nvim",
         version = "*", -- use latest release, remove to use latest commit
         ft = "markdown",
@@ -171,6 +118,119 @@ return {
                 default_tags = {},
                 workdays_only = true,
             },
+        },
+    },
+
+    -- custom which-key bindings for Obsidian
+    {
+        "folke/which-key.nvim",
+        opts = {
+            spec = {
+                -- Normal mode bindings
+                {
+                    mode = "n",
+                    { "<leader>o", group = "obsidian", icon = { icon = "󰋘 ", color = "purple" } },
+                    { "<leader>ow", group = "workspace", icon = { icon = "󰕉 ", color = "purple" } },
+                    { "<leader>on", group = "note", icon = { icon = "󰈙 ", color = "purple" } },
+                    {
+                        "<leader>oo",
+                        "<cmd>lua require('obsidian.workspace').set('vault')<cr>",
+                        desc = "Open vault",
+                        icon = { icon = "󰒔 ", color = "purple" },
+                    },
+                    {
+                        "<leader>owc",
+                        "<cmd>Obsidian workspace<cr>",
+                        desc = "Change",
+                        icon = { icon = "󰡊 ", color = "purple" },
+                    },
+                    {
+                        "<leader>os",
+                        "<cmd>Obsidian search<cr>",
+                        desc = "Search",
+                        icon = { icon = "󰍉 ", color = "purple" },
+                    },
+                    {
+                        "<leader>ot",
+                        "<cmd>Obsidian today<cr>",
+                        desc = "Today",
+                        icon = { icon = "󰃭 ", color = "purple" },
+                    },
+                    {
+                        "<leader>od",
+                        "<cmd>Obsidian dailies<cr>",
+                        desc = "Dailies",
+                        icon = { icon = "󰃲 ", color = "purple" },
+                    },
+                    {
+                        "<leader>oT",
+                        "<cmd>Obsidian tags<cr>",
+                        desc = "Tags",
+                        icon = { icon = " ", color = "purple" },
+                    },
+                    {
+                        "<leader>onn",
+                        "<cmd>Obsidian new<cr>",
+                        desc = "New note",
+                        icon = { icon = "󰏪 ", color = "purple" },
+                    },
+                    {
+                        "<leader>onb",
+                        "<cmd>Obsidian backlinks<cr>",
+                        desc = "Backlinks",
+                        icon = { icon = "󰌹 ", color = "purple" },
+                    },
+                    {
+                        "<leader>onl",
+                        "<cmd>Obsidian links<cr>",
+                        desc = "Links",
+                        icon = { icon = "󰌹 ", color = "purple" },
+                    },
+                },
+                -- Visual mode bindings
+                {
+                    mode = "x",
+                    { "<leader>o", group = "obsidian", icon = { icon = "󰋘 ", color = "purple" } },
+                    { "<leader>ov", group = "visual", icon = { icon = "󰘍 ", color = "purple" } },
+                    {
+                        "<leader>ove",
+                        "<cmd>Obsidian extract_note<cr>",
+                        desc = "Extract to note",
+                        icon = { icon = "󰈆 ", color = "purple" },
+                    },
+                    {
+                        "<leader>ovl",
+                        "<cmd>Obsidian link_new<cr>",
+                        desc = "Link to new",
+                        icon = { icon = " ", color = "purple" },
+                    },
+                },
+            },
+            filter = function(mapping)
+                -- Check if obsidian workspace is initialized for the session
+                local function obsidian_workspace_active()
+                    return package.loaded["obsidian"] ~= nil and _G.Obsidian ~= nil
+                end
+
+                -- Check if this is an obsidian-related mapping or group
+                if
+                    mapping.lhs
+                    and (mapping.lhs:match("^<leader>o") or mapping.lhs:match("^<Space>o") or mapping.lhs:match("^ o"))
+                then
+                    -- Always show entry-point group for obsidian
+                    if mapping.group and mapping.desc and mapping.desc == "obsidian" then
+                        return true
+                    end
+                    -- Always show open vault mapping
+                    if mapping.desc and mapping.desc:match("Open vault") then
+                        return true
+                    end
+                    -- Only show everything else if workspace is initialized
+                    return obsidian_workspace_active()
+                end
+
+                return true -- Show all other mappings
+            end,
         },
     },
 }

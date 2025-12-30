@@ -19,9 +19,9 @@ $kubernetes\
 [](fg:#212736)\
 ${custom.timewarrior_timer}\
 [](fg:#394260 bg:#212736)\
-${custom.task_context}\
-[](fg:#b9eb81 bg:#394260)\
 ${custom.task_count_pending}\
+[](fg:#b9eb81 bg:#394260)\
+${custom.task_context}\
 [▓▒░](#b9eb81)\
 \n\n$character"""
 
@@ -95,8 +95,8 @@ command = "task count rc.gc=off rc.verbose=nothing status:pending"
 when = "which task"
 symbol = "󰣉 "
 description = "Count of pending Taskwarrior tasks"
-style = "bg:#394260"
-format = '[[ $symbol$output ](fg:#1d2230 bg:#b9eb81)]($style)'
+style = "bg:#212736"
+format = '[[ $symbol$output ](fg:#b9eb81 bg:#394260)]($style)'
 
 [fill]
 symbol = ' '
@@ -104,20 +104,19 @@ symbol = ' '
 [custom.task_context]
 command = "task _get rc.context"
 when = "which task"
-symbol = "󰔚 "
+symbol = ""
 description = "Show current Taskwarrior context"
-style = "bg:#212736"
-format = '[[ $symbol$output ](fg:#a0a9cb bg:#394260)]($style)'
+style = "bg:#394260"
+format = '[[ $symbol$output ](fg:#1d2230 bg:#b9eb81)]($style)'
 
 
 [custom.timewarrior_timer]
 command = """
 if command -v timew >/dev/null 2>&1 && [ "$(timew get dom.active)" = "1" ]; then
-  timew | grep "Total" | awk '{print "⏱ " $2}'
+  timew | grep "Total" | awk '{print "󰔛 "}'
 fi
 """
-when = "which timew"
-symbol = ""
+when = "which timew && timew | grep Total"
 description = "Show current timewarrior timer if active"
 style = "bg:#212736"
 format = '[[ $output ](fg:#b9eb81 bg:#212736)]($style)'

@@ -1,5 +1,4 @@
 return {
-    -- add snacks config
     {
         "folke/snacks.nvim",
         opts = {
@@ -69,6 +68,7 @@ return {
                     function()
                         local in_git = Snacks.git.get_root() ~= nil
                         local cmds = {
+                            -- gh extension `notify`, needs to be installed separately
                             {
                                 title = "Notifications",
                                 cmd = "gh notify -s -a -n5",

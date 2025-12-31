@@ -29,3 +29,7 @@ vim.api.nvim_create_autocmd("User", {
         end
     end,
 })
+
+vim.api.nvim_create_user_command("Dash", function()
+    vim.cmd("lua Snacks.dashboard()")
+end, {})

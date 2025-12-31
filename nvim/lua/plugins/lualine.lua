@@ -48,7 +48,7 @@ return {
 
                     local result = vim.fn.system("task _get rc.context 2>/dev/null")
                     result = result:gsub("%s+", "")
-                    local display = result ~= "" and " " .. result or ""
+                    local display = result ~= "" and result or ""
 
                     _G.lualine_cache[cache_key] = { value = display, time = current_time }
                     return display
@@ -92,8 +92,13 @@ return {
             }
 
             table.insert(opts.sections.lualine_x, timewarrior_timer)
-            table.insert(opts.sections.lualine_x, task_count)
-            table.insert(opts.sections.lualine_x, task_context)
+
+            opts.sections = {
+                lualine_a = opts.sections.lualine_a,
+                lualine_b = opts.sections.lualine_b,
+                lualine_c = opts.sections.lualine_c,
+                lualine_x = opts.sections.lualine_x,
+            }
         end,
     },
 }

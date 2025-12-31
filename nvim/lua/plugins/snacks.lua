@@ -3,6 +3,51 @@ return {
     {
         "folke/snacks.nvim",
         opts = {
+            ---@type table<string, snacks.win.Config>
+            styles = {
+                zen = {
+                    width = 120,
+                    backdrop = { transparent = false, blend = 40 },
+                },
+            },
+            ---@class snacks.zen.Config
+            zen = {
+                -- You can add any `Snacks.toggle` id here.
+                -- Toggle state is restored when the window is closed.
+                -- Toggle config options are NOT merged.
+                ---@type table<string, boolean>
+                toggles = {
+                    dim = true,
+                    git_signs = false,
+                    mini_diff_signs = false,
+                    diagnostics = false,
+                    inlay_hints = false,
+                },
+                center = true, -- center the window
+                show = {
+                    statusline = false, -- can only be shown when using the global statusline
+                    tabline = false,
+                },
+                ---@type snacks.win.Config
+                win = { style = "zen" },
+                --- Callback when the window is opened.
+                ---@param win snacks.win
+                on_open = function(win) end,
+                --- Callback when the window is closed.
+                ---@param win snacks.win
+                on_close = function(win) end,
+                --- Options for the `Snacks.zen.zoom()`
+                ---@type snacks.zen.Config
+                zoom = {
+                    toggles = {},
+                    center = false,
+                    show = { statusline = true, tabline = true },
+                    win = {
+                        backdrop = false,
+                        width = 0, -- full width
+                    },
+                },
+            },
             dashboard = {
                 enabled = true,
                 sections = {
@@ -46,6 +91,12 @@ return {
                                 height = 9,
                             },
                             {
+                                icon = " ",
+                                title = "Actions",
+                                cmd = "gh run list -L 3",
+                                height = 5,
+                            },
+                            {
                                 icon = " ",
                                 title = "Git Status",
                                 cmd = "git --no-pager diff --stat -B -M -C",
@@ -72,10 +123,6 @@ return {
                     explorer = {
                         auto_close = true,
                     },
-                },
-                layout = {
-                    preset = "vertical",
-                    width = 0.99,
                 },
             },
             image = {

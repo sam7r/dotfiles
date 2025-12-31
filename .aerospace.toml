@@ -43,8 +43,9 @@ alt-v = 'split vertical'
 alt-f = 'fullscreen --no-outer-gaps'
 
 alt-s = 'layout v_accordion'               # 'layout stacking' in i3
-alt-w = 'layout h_accordion'               # 'layout tabbed' in i3
 alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+# alt-w = 'layout h_accordion'             # 'layout tabbed' in i3 (interferes
+# with nvim window navigation)
 
 alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
 

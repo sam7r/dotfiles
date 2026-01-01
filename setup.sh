@@ -1,13 +1,13 @@
 #!/bin/bash
 
 echo "syncing configs to local"
+chmod +x ./sync.sh
 ./sync.sh --to-local
 
 install_packages_linux() {
 	sudo pacman -S --noconfirm \
 		atuin \
 		eza \
-		carapace \
 		direnv \
 		fd \
 		fzf \
@@ -28,8 +28,13 @@ install_packages_linux() {
 		xclip \
 		zoxide
 
-	sudo pacman -S --noconfirm go nvm tfenv pyenv python-argcomplete
+		
+
+	sudo pacman -S --noconfirm go nvm pyenv python-argcomplete
 	sudo pacman -S --noconfirm ttf-firacode-nerd ttf-victor-mono-nerd figlet
+
+	# TODO: setup yay
+	# yay carapace tfenv
 }
 
 install_packages_mac() {
@@ -83,9 +88,12 @@ if [[ $(uname) == "Linux" ]]; then
 	if grep -q "ID=steamos" /etc/os-release && grep -q "VARIANT_ID=steamdeck" /etc/os-release; then
 		echo "running on steam deck, setting up distrobox..."
 		sudo pacman-key --init
-		sudo pacman-key --populate archlinux holosudo
+		sudo pacman-key --populate archlinux holo
 		sudo pacman -Syu --noconfirm base-devel
+
+		distrobox rm devbox -Y
 		distrobox create -n devbox -i archlinux
+		distrobox enter devbox -- bash -c "sudo pacman -Syu --noconfirm base-devel git"
 		distrobox enter devbox -- bash -c "$(declare -f install_packages_linux); install_packages_linux"
 		distrobox enter devbox -- bash -c "$(declare -f install_omzshplugins); install_omzshplugins"
 	else

@@ -12,7 +12,9 @@ install_packages_linux() {
 		fd \
 		fzf \
 		github-cli \
+		kubectl \
 		lazygit \
+		luarocks \
 		make \
 		neovim \
 		obsidian \
@@ -28,13 +30,16 @@ install_packages_linux() {
 		xclip \
 		zoxide
 
-		
-
 	sudo pacman -S --noconfirm go nvm pyenv python-argcomplete
 	sudo pacman -S --noconfirm ttf-firacode-nerd ttf-victor-mono-nerd figlet
 
-	# TODO: setup yay
-	# yay carapace tfenv
+	yay -S carapace tfenv
+}
+
+setup_yay() {
+	git clone https://aur.archlinux.org/yay.git
+	cd yay
+	makepkg -si
 }
 
 install_packages_mac() {
@@ -50,7 +55,9 @@ install_packages_mac() {
 		fd \
 		fzf \
 		gh \
+		kubectl \
 		lazygit \
+		luarocks \
 		make \
 		neovim \
 		obsidian \
@@ -81,6 +88,8 @@ install_omzshplugins() {
 	git clone https://github.com/mroth/evalcache ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/evalcache
 	# timewarrior
 	git clone https://github.com/svenXY/timewarrior ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/timewarrior
+	# kubectl prompt
+	git clone https://github.com/superbrothers/zsh-kubectl-prompt.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-kubectl-prompt
 }
 
 if [[ $(uname) == "Linux" ]]; then
@@ -94,6 +103,7 @@ if [[ $(uname) == "Linux" ]]; then
 		distrobox rm devbox -Y
 		distrobox create -n devbox -i archlinux
 		distrobox enter devbox -- bash -c "sudo pacman -Syu --noconfirm base-devel git"
+		distrobox enter devbox -- bash -c "$(declare -f setup_yay); setup_yay"
 		distrobox enter devbox -- bash -c "$(declare -f install_packages_linux); install_packages_linux"
 		distrobox enter devbox -- bash -c "$(declare -f install_omzshplugins); install_omzshplugins"
 	else

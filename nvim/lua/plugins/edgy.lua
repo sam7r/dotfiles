@@ -2,6 +2,9 @@ return {
     "folke/edgy.nvim",
     opts = function(_, opts)
         local step = 15
+        opts.animate = {
+            enabled = false,
+        }
         opts.keys = {
             -- increase width
             ["<c-Right>"] = function(win)

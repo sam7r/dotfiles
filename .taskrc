@@ -21,6 +21,7 @@ urgency.uda.size.coefficient=2.8
 # Jira ID UDA
 uda.jira_id.type=string
 uda.jira_id.label=Jira ID
+urgency.uda.jira_id.coefficient=5.0
 
 # Reset priority to downgrade L(ow)
 uda.priority.values=H,M,,L
@@ -52,6 +53,6 @@ report.a.labels=Active task
 report.a.filter=+ACTIVE
 
 ## Contexts
-context.dev=+dev or +story or +ticket or +bug or +task or +planning or jira_id.any:
+context.dev=+dev or +story or +ticket or +bug or +fix or +task or +planning or +refactor or +chore or jira_id.any:
 context.focus=+focus or +onboarding or +course or +learning
-context.admin=+admin or +config or +setup or +dot
+context.admin=+admin or +config or +setup

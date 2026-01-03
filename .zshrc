@@ -52,11 +52,16 @@ else
 fi
 
 # Set personal aliases
-alias gitrsubs="git submodule foreach 'git fetch origin --tags; git checkout master; git pull' && git pull && git submodule update --init --recursive"
 alias vim="nvim"
 alias ls="eza --icons=always"
 alias cd="z"
 alias gotest="go test -race ./..."
+
+gitsubpull() {
+    git submodule foreach 'git fetch origin --tags; git checkout master; git pull'
+    git pull
+    git submodule update --init --recursive
+}
 
 # Enable colors 
 autoload -U colors && colors
@@ -126,18 +131,23 @@ zmodload zsh/complist
 _comp_options+=(globdots)		# Include hidden files.
 autoload bashcompinit && bashcompinit
 source <(kubectl completion zsh)
-# Carapace setup
-export LS_COLORS="$(vivid generate tokyonight-moon)"
-export CARAPACE_BRIDGES='zsh,bash' # optional
-zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-source <(carapace _carapace)
 
+# Eval inits for various tools
 _evalcache starship init zsh
 _evalcache thefuck --alias
 _evalcache zoxide init zsh
 _evalcache pyenv init - zsh
 _evalcache register-python-argcomplete --no-defaults exegol
 _evalcache atuin init zsh
+
+# Carapace setup
+export LS_COLORS="$(vivid generate tokyonight-moon)"
+export CARAPACE_BRIDGES='zsh,bash' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+
+# Restoring taskwarrior completion overridden by carapace
+compdef _task task
 
 if [[ `uname` == "Linux" ]]; then
     alias sdn="shutdown -h now"

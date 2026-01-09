@@ -14,16 +14,6 @@ rev = "9a52857"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
-use = "imsi32/yatline"
-rev = "88bd1c5"
-hash = "981acbe9b758b1af3a8154c932bb936d"
-
-[[plugin.deps]]
-use = "wekauwau/yatline-tokyo-night"
-rev = "b4a6310"
-hash = "215729a555fe5286f1eb35520963d08"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
 rev = "9a52857"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
@@ -37,6 +27,11 @@ hash = "4c49c446328c4553a4ccab7facc10b21"
 use = "uhs-robert/recycle-bin"
 rev = "03f6c4a"
 hash = "f14a951bf376d7fe73033c4a48aa5fa4"
+
+[[plugin.deps]]
+use = "llanosrocas/yaziline"
+rev = "6266926"
+hash = "9917ab5cb9bdbab7ca7f2501f84f0f11"
 
 [[flavor.deps]]
 use = "BennyOe/tokyo-night"

@@ -141,18 +141,6 @@ return {
                         icon = { icon = "󰍉 ", color = "purple" },
                     },
                     {
-                        "<leader>ot",
-                        "<cmd>Obsidian today<cr>",
-                        desc = "Today",
-                        icon = { icon = "󰃭 ", color = "purple" },
-                    },
-                    {
-                        "<leader>od",
-                        "<cmd>Obsidian dailies<cr>",
-                        desc = "Dailies",
-                        icon = { icon = "󰃲 ", color = "purple" },
-                    },
-                    {
                         "<leader>oT",
                         "<cmd>Obsidian tags<cr>",
                         desc = "Tags",
@@ -177,9 +165,9 @@ return {
                         icon = { icon = "󰧮 ", color = "purple" },
                     },
                     {
-                        "<leader>ont",
+                        "<leader>onN",
                         "<cmd>Obsidian new_from_template<cr>",
-                        desc = "New From Template",
+                        desc = "New (From Template)",
                         icon = { icon = "󰈙 ", color = "purple" },
                     },
                     {
@@ -187,6 +175,12 @@ return {
                         "<cmd>Obsidian backlinks<cr>",
                         desc = "Backlinks",
                         icon = { icon = "󰌹 ", color = "purple" },
+                    },
+                    {
+                        "<leader>ond",
+                        "<cmd>Obsidian dailies<cr>",
+                        desc = "Dailies",
+                        icon = { icon = "󰃲 ", color = "purple" },
                     },
                     {
                         "<leader>onl",
@@ -199,6 +193,18 @@ return {
                         "<cmd>Obsidian toc<cr>",
                         desc = "TOC",
                         icon = { icon = "󰱾 ", color = "purple" },
+                    },
+                    {
+                        "<leader>ont",
+                        "<cmd>Obsidian today<cr>",
+                        desc = "Today",
+                        icon = { icon = "󰃭 ", color = "purple" },
+                    },
+                    {
+                        "<leader>ony",
+                        "<cmd>Obsidian yesterday<cr>",
+                        desc = "Yesterday",
+                        icon = { icon = "󰃭 ", color = "purple" },
                     },
                     {
                         "<leader>onr",

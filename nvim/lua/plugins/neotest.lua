@@ -13,6 +13,11 @@ return {
                     "uga-rosa/utf8.nvim", -- Additional dependency required
                 },
             },
+            {
+                -- "nvim-neotest/neotest-jest",
+                -- "adrigzr/neotest-mocha",
+                -- "marilari88/neotest-vitest",
+            },
         },
         ---@class neotest.CoreConfig
         opts = {
@@ -40,33 +45,29 @@ return {
                     go_test_args = { "-timeout=60s" },
                     dap_go_enabled = true, -- requires leoluz/nvim-dap-go
                     sanitize_output = true,
+                    runner = "gotestsum",
                     -- log_level = vim.log.levels.ERROR,
-                    -- runner = "gotestsum",
                 },
-            },
-        },
-    },
-    {
-        "nvim-neotest/neotest",
-        optional = true,
-        dependencies = {
-            "nvim-neotest/neotest-jest",
-            "adrigzr/neotest-mocha",
-        },
-        opts = {
-            adapters = {
-                ["neotest-jest"] = {
-                    jestCommand = "npm test --",
-                    jest_test_discovery = true,
-                    env = { CI = true },
-                    args = { "--coverage=false", "--passWithNoTests" },
-                },
-                ["neotest-mocha"] = {
-                    mochaCommand = "npm test --",
-                    mocha_test_discovery = true,
-                    env = { CI = true },
-                    args = { "--reporter", "spec" },
-                },
+                -- ["neotest-jest"] = {
+                --     jestCommand = "npm test --",
+                --     jest_test_discovery = true,
+                --     env = { CI = true },
+                --     args = { "--coverage=false", "--passWithNoTests" },
+                -- },
+                -- ["neotest-mocha"] = {
+                --     mochaCommand = "npm test --",
+                --     mocha_test_discovery = true,
+                --     env = { CI = true },
+                --     args = { "--reporter", "spec" },
+                -- },
+                -- ["neotest-vitest"] = {
+                --     filter_dir = function(name, rel_path, root)
+                --         return name ~= "node_modules"
+                --     end,
+                --     is_test_file = function(file_path)
+                --         return string.match(file_path, ".test.tsx")
+                --     end,
+                -- },
             },
         },
     },

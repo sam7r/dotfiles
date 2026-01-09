@@ -10,7 +10,14 @@ vim.opt_local.smartindent = true
 vim.opt_local.smarttab = true
 vim.opt_local.ttyfast = true
 
+vim.opt.scroll = 5
+vim.opt.scrolloff = 3
 vim.opt.textwidth = 80
 vim.opt.clipboard = "unnamedplus"
+vim.opt.ttyfast = true
 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+vim.g.minipairs_disable = true
+vim.g.snacks_animate = false
+vim.lsp.set_log_level("off")

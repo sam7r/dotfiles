@@ -117,6 +117,13 @@ return {
                 },
             },
             picker = {
+                formatters = {
+                    file = {
+                        -- shows full path when renaming, allows for autocompletion
+                        filename_first = false,
+                        truncate = "left",
+                    },
+                },
                 hidden = true,
                 ignored = true,
                 sources = {

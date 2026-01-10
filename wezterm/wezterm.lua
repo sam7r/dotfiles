@@ -46,6 +46,7 @@ return {
 		},
 		{
 			italic = true,
+			intensity = "Half",
 			font = wezterm.font("VictorMono Nerd Font", { weight = "DemiLight" }),
 		},
 		{

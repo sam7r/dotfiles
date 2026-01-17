@@ -19,6 +19,12 @@ return {
 	tab_bar_at_bottom = true,
 	hide_tab_bar_if_only_one_tab = true,
 	tab_max_width = 32,
+	colors = {
+		tab_bar = {
+			background = "none",
+		},
+	},
+	show_new_tab_button_in_tab_bar = false,
 	unzoom_on_switch_pane = true,
 	window_padding = {
 		left = 0,

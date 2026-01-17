@@ -12,6 +12,10 @@ return {
                 sidebars = "transparent",
                 floats = "transparent",
             },
+            ---@param colors ColorScheme
+            on_colors = function(colors)
+                colors.bg_statusline = colors.none
+            end,
         },
     },
 }

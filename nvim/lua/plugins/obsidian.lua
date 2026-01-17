@@ -246,29 +246,31 @@ return {
             },
             -- filter to ensure obsidian mappings only show when obsidian is active (workspace initialized)
             filter = function(mapping)
-                -- Check if obsidian workspace is initialized for the session
-                local function obsidian_workspace_active()
-                    return package.loaded["obsidian"] ~= nil and _G.Obsidian ~= nil
-                end
-
-                -- Check if this is an obsidian-related mapping or group
+                -- Early return for non-obsidian mappings
                 if
-                    mapping.lhs
-                    and (mapping.lhs:match("^<leader>o") or mapping.lhs:match("^<Space>o") or mapping.lhs:match("^ o"))
+                    not mapping.lhs
+                    or not (
+                        mapping.lhs:sub(1, 9) == "<leader>o"
+                        or mapping.lhs:sub(1, 8) == "<Space>o"
+                        or mapping.lhs:sub(1, 2) == " o"
+                    )
                 then
-                    -- Always show entry-point group for obsidian
-                    if mapping.group and mapping.desc and mapping.desc == "obsidian" then
-                        return true
-                    end
-                    -- Always show open vault mapping
-                    if mapping.desc and mapping.desc:match("Open vault") then
-                        return true
-                    end
-                    -- Only show everything else if workspace is initialized
-                    return obsidian_workspace_active()
+                    return true
                 end
 
-                return true -- Show all other mappings
+                -- Cache obsidian status check
+                local obsidian_active = package.loaded["obsidian"] ~= nil and _G.Obsidian ~= nil
+
+                -- Always show main obsidian group and open vault
+                if
+                    (mapping.group and mapping.desc == "obsidian")
+                    or (mapping.desc and mapping.desc:find("Open vault", 1, true))
+                then
+                    return true
+                end
+
+                -- Only show other obsidian mappings if workspace is initialized
+                return obsidian_active
             end,
         },
     },

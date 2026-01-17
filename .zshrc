@@ -134,10 +134,7 @@ source <(kubectl completion zsh)
 
 # Eval inits for various tools
 _evalcache starship init zsh
-_evalcache thefuck --alias
 _evalcache zoxide init zsh
-_evalcache pyenv init - zsh
-_evalcache register-python-argcomplete --no-defaults exegol
 _evalcache atuin init zsh
 
 # Carapace setup

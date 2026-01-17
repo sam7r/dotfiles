@@ -14,6 +14,7 @@ return {
             },
             ---@param colors ColorScheme
             on_colors = function(colors)
+                -- set transparent background for statusline
                 colors.bg_statusline = colors.none
             end,
         },

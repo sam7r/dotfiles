@@ -12,14 +12,8 @@ $rust\
 $java\
 $golang\
 $php\
-[](fg:#212736 bg:#1d2230)\
+[](fg:#212736)\
 $kubernetes\
-[](fg:#1d2230 bg:#b9eb81)\
-${custom.task_context}\
-[](fg:#b9eb81 bg:#394260)\
-${custom.task_count_pending}\
-[](fg:#394260)\
-${custom.timewarrior_timer}\
 \n\n$character"""
 
 [directory]
@@ -86,33 +80,3 @@ disabled = false
 time_format = "%R"                                      # Hour:Minute Format
 style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
-
-[custom.task_count_pending]
-command = "task count rc.gc=off rc.verbose=nothing status:pending"
-when = "which task"
-symbol = "󰣉 "
-description = "Count of pending Taskwarrior tasks"
-style = "bg:#212736"
-format = '[[ $symbol$output ](fg:#b9eb81 bg:#394260)]($style)'
-
-[fill]
-symbol = ' '
-
-[custom.task_context]
-command = "task _get rc.context"
-when = "which task"
-symbol = ""
-description = "Show current Taskwarrior context"
-style = "bg:#394260"
-format = '[[ $symbol$output ](fg:#1d2230 bg:#b9eb81)]($style)'
-
-
-[custom.timewarrior_timer]
-command = """
-if command -v timew >/dev/null 2>&1 && [ "$(timew get dom.active)" = "1" ]; then
-  timew | grep "Total" | awk '{print "󰔛 "}'
-fi
-"""
-when = "which timew && timew | grep Total"
-description = "Show current timewarrior timer if active"
-format = '[[ $output ](fg:#b9eb81)]($style)'

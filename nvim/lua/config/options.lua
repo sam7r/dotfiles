@@ -15,6 +15,7 @@ vim.opt.scrolloff = 3
 vim.opt.textwidth = 80
 vim.opt.clipboard = "unnamedplus"
 vim.opt.ttyfast = true
+vim.opt.pumblend = 0
 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 

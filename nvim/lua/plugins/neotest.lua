@@ -43,10 +43,10 @@ return {
                 ["neotest-golang"] = {
                     -- Here we can set options for neotest-golang, e.g.
                     go_test_args = { "-timeout=60s" },
-                    dap_go_enabled = true, -- requires leoluz/nvim-dap-go
+                    -- dap_go_enabled = true, -- requires leoluz/nvim-dap-go
                     sanitize_output = true,
                     runner = "gotestsum",
-                    -- log_level = vim.log.levels.ERROR,
+                    log_level = vim.log.levels.ERROR,
                 },
                 -- ["neotest-jest"] = {
                 --     jestCommand = "npm test --",

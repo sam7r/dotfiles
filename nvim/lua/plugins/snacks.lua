@@ -128,6 +128,7 @@ return {
                 ignored = true,
                 sources = {
                     explorer = {
+                        diagnostics = false,
                         auto_close = true,
                     },
                 },

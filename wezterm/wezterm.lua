@@ -27,10 +27,10 @@ return {
 	show_new_tab_button_in_tab_bar = false,
 	unzoom_on_switch_pane = true,
 	window_padding = {
-		left = 0,
-		right = 0,
-		top = 0,
-		bottom = 0,
+		left = "1cell",
+		right = "1cell",
+		top = "0.5cell",
+		bottom = "0.5cell",
 	},
 	window_decorations = "RESIZE",
 	inactive_pane_hsb = {
@@ -43,7 +43,6 @@ return {
 	leader = mappings.leader,
 	keys = utils.merge(mappings.keys, resurrect.keys),
 	key_tables = mappings.key_tables,
-	-- font_size = 12,
 	font = wezterm.font("FiraCode Nerd Font"),
 	font_rules = {
 		{

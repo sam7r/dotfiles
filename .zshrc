@@ -30,13 +30,14 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	autoupdate
-    zsh-nvm
-    zsh-autosuggestions
-    zsh-syntax-highlighting
+    aws
     evalcache
     direnv
     taskwarrior
     timewarrior
+    zsh-nvm
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -125,11 +126,11 @@ export PYENV_ROOT="$HOME/.pyenv"
 export ANDROID_HOME="$HOME/Android/Sdk"
 
 # Basic auto/tab complete:
-autoload -Uz compinit && compinit
+autoload -Uz +X compinit && compinit
+autoload -Uz +X bashcompinit && bashcompinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 _comp_options+=(globdots)		# Include hidden files.
-autoload bashcompinit && bashcompinit
 source <(kubectl completion zsh)
 
 # Eval inits for various tools
@@ -153,8 +154,7 @@ fi
 
 if [[ `uname` == "Darwin" ]]; then
     export PATH=/opt/homebrew/bin:$PATH
-    complete -C '/opt/homebrew/bin/aws_completer' aws
-    complete -C '/opt/homebrew/bin/aws_completer' awslocal
+    export AWS_PROFILE=dev
 fi
 
 if [[ "$ZPROF" = true ]]; then

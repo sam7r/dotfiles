@@ -38,7 +38,7 @@ color.due.today=red
 color.overdue=bold red
 
 # UDA
-#color.uda.X=
+color.uda.jira_id=blue
 
 # Report: burndown
 color.burndown.done=on green

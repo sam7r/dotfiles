@@ -12,7 +12,7 @@ return {
 	cursor_blink_ease_in = "Constant",
 	cursor_blink_ease_out = "Constant",
 	line_height = 1.0,
-	window_background_opacity = 0.95,
+	window_background_opacity = 0.7,
 	macos_window_background_blur = 20,
 	-- tab bar
 	use_fancy_tab_bar = false,
@@ -21,7 +21,7 @@ return {
 	tab_max_width = 32,
 	colors = {
 		tab_bar = {
-			background = "none",
+			background = "rgba(0,0,0,0)",
 		},
 	},
 	show_new_tab_button_in_tab_bar = false,

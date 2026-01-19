@@ -53,10 +53,11 @@ else
 fi
 
 # Set personal aliases
-alias vim="nvim"
-alias ls="eza --icons=always"
 alias cd="z"
 alias gotest="go test -race ./..."
+alias lg="lazygit"
+alias ls="eza --icons=always"
+alias vim="nvim"
 
 gitsubpull() {
     git submodule foreach 'git fetch origin --tags; git checkout master; git pull'
@@ -131,7 +132,6 @@ autoload -Uz +X bashcompinit && bashcompinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 _comp_options+=(globdots)		# Include hidden files.
-source <(kubectl completion zsh)
 
 # Eval inits for various tools
 _evalcache starship init zsh

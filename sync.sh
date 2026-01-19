@@ -137,6 +137,12 @@ sync_to() {
 			print_status "Syncing aerospace config..."
 			cp .aerospace.toml "$HOME/"
 		fi
+
+		if [ -f "lazygit/config.yml" ]; then
+			print_status "Syncing lazygit config..."
+			mkdir -p "$HOME/Library/Application Support/lazygit"
+			cp lazygit/config.yml "$HOME/Library/Application Support/lazygit/"
+		fi
 	fi
 
 	# Linux-specific configs
@@ -153,6 +159,12 @@ sync_to() {
 
 		if [ -d "rofi" ]; then
 			sync_dir "rofi/" "$HOME/.config/rofi/" "rofi config"
+		fi
+
+		if [ -f "lazygit/config.yml" ]; then
+			print_status "Syncing lazygit config..."
+			mkdir -p "$HOME/.config/lazygit"
+			cp lazygit/config.yml "$HOME/.config/lazygit/"
 		fi
 
 		if [ -f "picom/picom.conf" ]; then
@@ -230,6 +242,12 @@ sync_from() {
 			print_status "Syncing aerospace config from home..."
 			cp "$HOME/.aerospace.toml" .
 		fi
+
+		if [ -f "$HOME/Library/Application Support/lazygit/config.yml" ]; then
+			print_status "Syncing lazygit config from home..."
+			mkdir -p lazygit
+			cp "$HOME/Library/Application Support/lazygit/config.yml" lazygit/
+		fi
 	fi
 
 	# Linux-specific configs
@@ -246,6 +264,12 @@ sync_from() {
 
 		if [ -d "$HOME/.config/rofi" ]; then
 			sync_dir "$HOME/.config/rofi/" "rofi/" "rofi config from .config"
+		fi
+
+		if [ -f "$HOME/.config/lazygit/config.yml" ]; then
+			print_status "Syncing lazygit config from .config..."
+			mkdir -p lazygit
+			cp "$HOME/.config/lazygit/config.yml" lazygit/
 		fi
 
 		if [ -f "$HOME/.config/picom/picom.conf" ]; then

@@ -191,10 +191,16 @@ bindsym $mod+r mode "resize"
 gaps inner 5
 gaps top -5
 
+# removes border for single window
+smart_borders on
+
 for_window[class=".*"] border pixel 1
 
 exec_always --no-startup-id killall picom -b
 exec_always --no-startup-id picom -b
+
+# boost saturation
+exec --no-startup-id vibrant-cli HDMI-1 1.4
 
 exec_always --no-startup-id feh --bg-fill /home/sam/Wallpapers/3312580.jpg
 

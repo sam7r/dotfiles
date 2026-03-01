@@ -12,7 +12,7 @@ return {
 	cursor_blink_ease_in = "Constant",
 	cursor_blink_ease_out = "Constant",
 	line_height = 1.0,
-	window_background_opacity = 0.7,
+	window_background_opacity = 0.5,
 	macos_window_background_blur = 20,
 	-- tab bar
 	use_fancy_tab_bar = false,

@@ -113,12 +113,12 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: 󰖟 "
-set $ws2 "2:  "
-set $ws3 "3:  "
-set $ws4 "4:  "
-set $ws5 "5: 󰓓 "
-set $ws6 "6:  "
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -196,7 +196,7 @@ for_window[class=".*"] border pixel 1
 exec_always --no-startup-id killall picom -b
 exec_always --no-startup-id picom -b
 
-exec_always --no-startup-id feh --bg-fill /home/sam/Wallpapers/wallhaven-x1kpl3.jpg
+exec_always --no-startup-id feh --bg-fill /home/sam/Wallpapers/3312580.jpg
 
 exec_always --no-startup-id killall polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh

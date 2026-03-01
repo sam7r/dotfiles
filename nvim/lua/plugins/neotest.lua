@@ -14,9 +14,8 @@ return {
                 },
             },
             {
-                -- "nvim-neotest/neotest-jest",
-                -- "adrigzr/neotest-mocha",
-                -- "marilari88/neotest-vitest",
+                "nvim-neotest/neotest-jest",
+                "marilari88/neotest-vitest",
             },
         },
         ---@class neotest.CoreConfig
@@ -41,33 +40,24 @@ return {
             },
             adapters = {
                 ["neotest-golang"] = {
-                    -- Here we can set options for neotest-golang, e.g.
                     go_test_args = { "-timeout=60s" },
-                    -- dap_go_enabled = true, -- requires leoluz/nvim-dap-go
                     sanitize_output = true,
                     runner = "gotestsum",
-                    log_level = vim.log.levels.ERROR,
                 },
-                -- ["neotest-jest"] = {
-                --     jestCommand = "npm test --",
-                --     jest_test_discovery = true,
-                --     env = { CI = true },
-                --     args = { "--coverage=false", "--passWithNoTests" },
-                -- },
-                -- ["neotest-mocha"] = {
-                --     mochaCommand = "npm test --",
-                --     mocha_test_discovery = true,
-                --     env = { CI = true },
-                --     args = { "--reporter", "spec" },
-                -- },
-                -- ["neotest-vitest"] = {
-                --     filter_dir = function(name, rel_path, root)
-                --         return name ~= "node_modules"
-                --     end,
-                --     is_test_file = function(file_path)
-                --         return string.match(file_path, ".test.tsx")
-                --     end,
-                -- },
+                ["neotest-jest"] = {
+                    jestCommand = "npm test --",
+                    jest_test_discovery = true,
+                    env = { CI = true },
+                    args = { "--coverage=false", "--passWithNoTests" },
+                },
+                ["neotest-vitest"] = {
+                    filter_dir = function(name, rel_path, root)
+                        return name ~= "node_modules"
+                    end,
+                    is_test_file = function(file_path)
+                        return string.match(file_path, ".test.tsx")
+                    end,
+                },
             },
         },
     },

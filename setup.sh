@@ -31,7 +31,7 @@ install_packages_linux() {
     zoxide
 
   sudo pacman -S --noconfirm go nvm pyenv python-argcomplete
-  sudo pacman -S --noconfirm ttf-firacode-nerd ttf-victor-mono-nerd figlet
+  sudo pacman -S --noconfirm ttf-firacode-nerd ttf-victor-mono-nerd
 
   yay -S carapace tfenv
 }

@@ -51,8 +51,7 @@ return {
                 enabled = true,
                 sections = {
                     {
-                        section = "terminal",
-                        cmd = 'figlet -w 100 $(basename "$PWD")',
+                        section = "header",
                         height = 6,
                         padding = 1,
                     },

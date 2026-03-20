@@ -5,111 +5,112 @@ chmod +x ./sync.sh
 ./sync.sh --to-local
 
 install_packages_linux() {
-	sudo pacman -S --noconfirm \
-		atuin \
-		eza \
-		direnv \
-		fd \
-		fzf \
-		github-cli \
-		kubectl \
-		lazygit \
-		luarocks \
-		make \
-		neovim \
-		obsidian \
-		packer \
-		ripgrep \
-		starship \
-		task \
-		timew \
-		thefuck \
-		tree \
-		tree-sitter-cli \
-		vivid \
-		xclip \
-		zoxide
+  sudo pacman -S --noconfirm \
+    atuin \
+    eza \
+    direnv \
+    fd \
+    fzf \
+    github-cli \
+    kubectl \
+    lazygit \
+    luarocks \
+    make \
+    neovim \
+    obsidian \
+    packer \
+    ripgrep \
+    starship \
+    task \
+    timew \
+    thefuck \
+    tree \
+    tree-sitter-cli \
+    vivid \
+    xclip \
+    zoxide
 
-	sudo pacman -S --noconfirm go nvm pyenv python-argcomplete
-	sudo pacman -S --noconfirm ttf-firacode-nerd ttf-victor-mono-nerd figlet
+  sudo pacman -S --noconfirm go nvm pyenv python-argcomplete
+  sudo pacman -S --noconfirm ttf-firacode-nerd ttf-victor-mono-nerd figlet
 
-	yay -S carapace tfenv
+  yay -S carapace tfenv
 }
 
 setup_yay() {
-	git clone https://aur.archlinux.org/yay.git
-	cd yay
-	makepkg -si
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
 }
 
 install_packages_mac() {
-	if ! command -v brew &>/dev/null; then
-		echo "Installing Homebrew..."
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	fi
+  if ! command -v brew &>/dev/null; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
 
-	brew install \
-		atuin \
-		eza \
-		carapace \
-		fd \
-		fzf \
-		gh \
-		kubectl \
-		lazygit \
-		luarocks \
-		make \
-		neovim \
-		obsidian \
-		ripgrep \
-		starship \
-		task \
-		timewarrior \
-		thefuck \
-		tree \
-		tree-sitter \
-		zoxide
+  brew install \
+    atuin \
+    eza \
+    carapace \
+    fd \
+    fzf \
+    gh \
+    kubectl \
+    lazygit \
+    luarocks \
+    make \
+    neovim \
+    obsidian \
+    ripgrep \
+    starship \
+    task \
+    timewarrior \
+    thefuck \
+    tree \
+    tree-sitter \
+    zoxide
 
-	brew install go nvm tfenv pyenv
-	brew install --cask font-fira-code-nerd font-victor-mono-nerd
+  brew install go nvm tfenv pyenv
+  brew install --cask font-fira-code-nerd font-victor-mono-nerd
+  brew install --cask nikitabobko/tap/aerospace
 }
 
 install_omzshplugins() {
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	# autoupdate plugin
-	git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/autoupdate
-	# nvm plugin
-	git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
-	# zsh-autosuggestions
-	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-	# zsh-syntax-highlighting
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-	# evalcache
-	git clone https://github.com/mroth/evalcache ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/evalcache
-	# timewarrior
-	git clone https://github.com/svenXY/timewarrior ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/timewarrior
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  # autoupdate plugin
+  git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/autoupdate
+  # nvm plugin
+  git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
+  # zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  # zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  # evalcache
+  git clone https://github.com/mroth/evalcache ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/evalcache
+  # timewarrior
+  git clone https://github.com/svenXY/timewarrior ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/timewarrior
 }
 
 if [[ $(uname) == "Linux" ]]; then
-	echo "installing linux deps..."
-	if grep -q "ID=steamos" /etc/os-release && grep -q "VARIANT_ID=steamdeck" /etc/os-release; then
-		echo "running on steam deck, setting up distrobox..."
-		sudo pacman-key --init
-		sudo pacman-key --populate archlinux holo
-		sudo pacman -Syu --noconfirm base-devel
+  echo "installing linux deps..."
+  if grep -q "ID=steamos" /etc/os-release && grep -q "VARIANT_ID=steamdeck" /etc/os-release; then
+    echo "running on steam deck, setting up distrobox..."
+    sudo pacman-key --init
+    sudo pacman-key --populate archlinux holo
+    sudo pacman -Syu --noconfirm base-devel
 
-		distrobox rm devbox -Y
-		distrobox create -n devbox -i archlinux
-		distrobox enter devbox -- bash -c "sudo pacman -Syu --noconfirm base-devel git"
-		distrobox enter devbox -- bash -c "$(declare -f setup_yay); setup_yay"
-		distrobox enter devbox -- bash -c "$(declare -f install_packages_linux); install_packages_linux"
-		distrobox enter devbox -- bash -c "$(declare -f install_omzshplugins); install_omzshplugins"
-	else
-		install_packages_linux
-		install_omzshplugins
-	fi
+    distrobox rm devbox -Y
+    distrobox create -n devbox -i archlinux
+    distrobox enter devbox -- bash -c "sudo pacman -Syu --noconfirm base-devel git"
+    distrobox enter devbox -- bash -c "$(declare -f setup_yay); setup_yay"
+    distrobox enter devbox -- bash -c "$(declare -f install_packages_linux); install_packages_linux"
+    distrobox enter devbox -- bash -c "$(declare -f install_omzshplugins); install_omzshplugins"
+  else
+    install_packages_linux
+    install_omzshplugins
+  fi
 elif [[ $(uname) == "Darwin" ]]; then
-	echo "installing mac deps..."
-	install_packages_mac
-	install_omzshplugins
+  echo "installing mac deps..."
+  install_packages_mac
+  install_omzshplugins
 fi

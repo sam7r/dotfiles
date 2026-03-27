@@ -48,10 +48,22 @@ install_packages_mac() {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
+  brew install --cask raycast
+  brew install --cask wezterm
+  brew install --cask font-fira-code-nerd
+  brew install --cask font-victor-mono-nerd-font
+  brew install --cask nikitabobko/tap/aerospace
+  brew install --cask copilot-cli
+
+  brew tap FelixKratz/formulae
+
   brew install \
     atuin \
+    awscli \
     eza \
+    borders \
     carapace \
+    direnv \
     fd \
     fzf \
     gh \
@@ -61,6 +73,7 @@ install_packages_mac() {
     make \
     neovim \
     obsidian \
+    opencode \
     ripgrep \
     starship \
     task \
@@ -68,11 +81,14 @@ install_packages_mac() {
     thefuck \
     tree \
     tree-sitter \
+    vivid \
     zoxide
 
   brew install go nvm tfenv pyenv
-  brew install --cask font-fira-code-nerd font-victor-mono-nerd
-  brew install --cask nikitabobko/tap/aerospace
+
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+  gh ext install meiji163/gh-notify
 }
 
 install_omzshplugins() {

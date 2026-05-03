@@ -199,9 +199,6 @@ for_window[class=".*"] border pixel 1
 exec_always --no-startup-id killall picom -b
 exec_always --no-startup-id picom -b
 
-# boost saturation
-exec --no-startup-id vibrant-cli HDMI-1 1.4
-
 exec_always --no-startup-id feh --bg-fill /home/sam/Wallpapers/3312580.jpg
 
 exec_always --no-startup-id killall polybar
@@ -216,6 +213,9 @@ exec_always --no-startup-id gsettings set org.gnome.desktop.interface cursor-siz
 
 exec_always --no-startup-id xrdb -merge ~/.Xresources
 exec_always --no-startup-id xrandr --output HDMI-1 --mode 3840x2160 --rate 120 --pos 3840x0 --rotate normal --dpi 192
+
+# boost saturation
+exec --no-startup-id vibrant-cli HDMI-1 1.2
 
 # class                 border  bground text    indicator child_border
 client.focused          #7d7d7d #7d7d7d #282A36 #7d7d7d   #7d7d7d

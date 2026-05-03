@@ -178,6 +178,16 @@ sync_to() {
 			mkdir -p "$HOME/.config/gtk-3.0"
 			cp gtk-x/settings.ini "$HOME/.config/gtk-3.0/"
 		fi
+
+    if [ -f ".Xresources" ]; then
+      print_status "Syncing .Xresources..."
+      cp .Xresources "$HOME/"
+    fi
+
+    if [ -f ".xprofile" ]; then
+      print_status "Syncing .xprofile..."
+      cp .xprofile "$HOME/"
+    fi
 	fi
 
 	print_status "Sync to local .config completed!"
@@ -283,6 +293,16 @@ sync_from() {
 			mkdir -p gtk-x
 			cp "$HOME/.config/gtk-3.0/settings.ini" gtk-x/
 		fi
+
+    if [ -f "$HOME/.Xresources" ]; then
+      print_status "Syncing .Xresources from home..."
+      cp "$HOME/.Xresources" .
+    fi
+
+    if [ -f "$HOME/.xprofile" ]; then
+      print_status "Syncing .xprofile from home..."
+      cp "$HOME/.xprofile" .
+    fi
 	fi
 
 	print_status "Sync from local .config completed!"

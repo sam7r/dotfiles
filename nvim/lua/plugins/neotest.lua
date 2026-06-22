@@ -42,6 +42,7 @@ return {
                 ["neotest-golang"] = {
                     go_test_args = { "-timeout=60s" },
                     sanitize_output = true,
+                    testify_enabled = true,
                     runner = "gotestsum",
                 },
                 ["neotest-jest"] = {

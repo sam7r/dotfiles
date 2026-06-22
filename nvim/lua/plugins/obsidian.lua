@@ -20,7 +20,7 @@ return {
                 },
             },
             attachments = {
-                img_folder = "/.assets",
+                folder = "/.assets",
             },
             new_notes_location = "notes_subdir",
             notes_subdir = "+Inbox",
@@ -88,28 +88,31 @@ return {
                 end
             end,
 
-            note_frontmatter_func = function(note)
-                -- Add the title as an alias if it exists
-                if note.title then
-                    note:add_alias(note.title)
-                end
-                -- Optionally, use title as ID if no ID is set
-                if note.title and (note.id == nil or note.id == "") then
-                    local safe_title = note.title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-                    note.id = safe_title
-                end
-                -- Return the frontmatter
-                local out = { id = note.id, aliases = note.aliases, tags = note.tags }
-
-                -- Include any manually added fields
-                if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-                    for k, v in pairs(note.metadata) do
-                        out[k] = v
+            ---@class obsidian.config.FrontmatterOpts
+            frontmatter = {
+                func = function(note)
+                    -- Add the title as an alias if it exists
+                    if note.title then
+                        note:add_alias(note.title)
                     end
-                end
+                    -- Optionally, use title as ID if no ID is set
+                    if note.title and (note.id == nil or note.id == "") then
+                        local safe_title = note.title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+                        note.id = safe_title
+                    end
+                    -- Return the frontmatter
+                    local out = { id = note.id, aliases = note.aliases, tags = note.tags }
 
-                return out
-            end,
+                    -- Include any manually added fields
+                    if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+                        for k, v in pairs(note.metadata) do
+                            out[k] = v
+                        end
+                    end
+
+                    return out
+                end,
+            },
         },
     },
 

@@ -43,6 +43,7 @@ return {
                 "gomod",
                 "gowork",
                 "gosum",
+                "hurl",
             })
         end,
     },

@@ -21,4 +21,4 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 
 vim.g.minipairs_disable = true
 vim.g.snacks_animate = false
-vim.lsp.set_log_level("off")
+vim.hl = vim.highlight

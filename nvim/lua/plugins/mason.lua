@@ -13,7 +13,7 @@ return {
                 "golines",
                 "gomodifytags",
                 "gopls",
-                "golangci-lint",
+                -- "golangci-lint", # conflicts with local version
                 "golangci-lint-langserver",
                 "gotests",
                 "hadolint",
@@ -24,8 +24,7 @@ return {
                 "json-lsp",
                 "jsonlint",
                 "lua-language-server",
-                "marksman",
-                "markdownlint",
+                "markdownlint-cli2",
                 "prettier",
                 "shellcheck",
                 "shfmt",

@@ -7,7 +7,7 @@ return {
         opts = {
             linters = {
                 ["markdownlint-cli2"] = {
-                    args = { "--config", nvim_config .. "/.markdown-lint.yaml", "--" },
+                    args = { "--config", nvim_config .. "/markdown-lint.yaml", "--" },
                 },
             },
         },

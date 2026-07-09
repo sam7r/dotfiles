@@ -19,6 +19,7 @@ vim.opt.pumblend = 0
 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
+vim.g.editorconfig = true
 vim.g.minipairs_disable = true
 vim.g.snacks_animate = false
 vim.hl = vim.highlight

@@ -81,6 +81,7 @@ install_packages_mac() {
     thefuck \
     tree \
     tree-sitter \
+    uv \
     vivid \
     zoxide
 
